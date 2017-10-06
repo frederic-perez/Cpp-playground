@@ -21,7 +21,7 @@ max() {
 template <class T>
 constexpr
 size_t
-count() { // Note: This works for consecutive enum values; if not > Specialize!
+count_defined() { // Note: This works for consecutive enum values; if not > Specialize!
 	return max<T>() - min<T>() + 1;
 }
 
@@ -35,19 +35,20 @@ enum class Planet : uint8_t {
   Uranus,
   Neptune,
   min = Mercury,
-  max = Neptune
+  max = Neptune,
+  undefined
 };
 
 enum class Opposite : uint8_t {
   yin,
   yang,
   min = yin,
-  max = yang  
+  max = yang,
+  undefined
 };
 
-//static 
-constexpr std::array<Planet, count<Planet>()>
-  all_planets{{
+constexpr std::array<Planet, count_defined<Planet>()>
+  all_defined_planets{{
     Planet::Mercury,
     Planet::Venus,
     Planet::Earth,
@@ -57,14 +58,13 @@ constexpr std::array<Planet, count<Planet>()>
     Planet::Uranus,
     Planet::Neptune
   }};
-static_assert(all_planets.front() == Planet::min, "static_assert failed: Bad array--check min");
-static_assert(all_planets.back() == Planet::max, "static_assert failed: Bad array--check max");
+static_assert(all_defined_planets.front() == Planet::min, "static_assert failed: Bad array--check min");
+static_assert(all_defined_planets.back() == Planet::max, "static_assert failed: Bad array--check max");
 
-//static 
-constexpr std::array<Opposite, count<Opposite>()>
-  all_opposites{{ Opposite::yin, Opposite::yang }};
-static_assert(all_opposites.front() == Opposite::min, "static_assert failed: Bad array--check min");
-static_assert(all_opposites.back() == Opposite::max, "static_assert failed: Bad array--check max");
+constexpr std::array<Opposite, count_defined<Opposite>()>
+  all_defined_opposites{{ Opposite::yin, Opposite::yang }};
+static_assert(all_defined_opposites.front() == Opposite::min, "static_assert failed: Bad array--check min");
+static_assert(all_defined_opposites.back() == Opposite::max, "static_assert failed: Bad array--check max");
 
 void ExamplesOfEnumClassIteration();
 
