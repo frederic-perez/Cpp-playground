@@ -26,7 +26,7 @@ else ()
 endif ()
 
 set(SRC_LIST
-	enum-class-iteration.cpp
+	enum-class-iteration.cpp enum-class-iteration.h
 	main.cpp
 )
 

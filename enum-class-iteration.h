@@ -2,7 +2,7 @@
 
 #include <array>
 
-namespace tools {
+namespace enums {
 
 template <class T>
 constexpr
@@ -68,4 +68,4 @@ static_assert(all_opposites.back() == Opposite::max, "static_assert failed: Bad 
 
 void ExamplesOfEnumClassIteration();
 
-} // namespace tools
+} // namespace enums

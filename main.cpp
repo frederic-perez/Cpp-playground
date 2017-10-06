@@ -7,9 +7,9 @@
 int
 main(int /*argc*/, char* /*argv*/[])
 {
-  std::cout << "Hello, Cpp-playground!" << std::endl;
+  std::cout << "Hello, Cpp-playground!\n" << std::endl;
 
-  tools::ExamplesOfEnumClassIteration();
+  enums::ExamplesOfEnumClassIteration();
   std::cout << std::endl;
 
   std::cout << "Bye, Cpp-playground!" << std::endl;
