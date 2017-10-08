@@ -7,11 +7,11 @@ namespace enums {
 template <class T>
 constexpr
 size_t
-count_defined() { 
-  // Note: This works for 
+count_defined() {
+  // Note: This works for
   // 1. consecutive enum values, starting with "zero"; if not > Specialize, and
   // 2. `undefined` must be the last value of the enum class
-	return static_cast<size_t>(T::undefined);
+  return static_cast<size_t>(T::undefined);
 }
 
 enum class Planet : uint8_t {
