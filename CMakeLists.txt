@@ -61,22 +61,36 @@ if("${CMAKE_SYSTEM_NAME}" MATCHES "Windows")
 elseif("${CMAKE_SYSTEM_NAME}" MATCHES "Linux")
 	if(CMAKE_COMPILER_IS_GNUCXX)
 		message(STATUS "Entering Linux/CMAKE_COMPILER_IS_GNUCXX branch.")
-# TODO: Use string(CONCAT CMAKE_CXX_FLAGS after updating cmake-gui!
-		set(CMAKE_CXX_FLAGS
-			"${CMAKE_CXX_FLAGS} -Wall -std=c++11 -D${def_CMAKE_MYUSERNAME} -D${def_CMAKE_MYHOSTNAME}")
-		set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pthread")
+		string(CONCAT CMAKE_CXX_FLAGS
+			"-std=c++11 -D${def_CMAKE_MYUSERNAME} -D${def_CMAKE_MYHOSTNAME} "
+		  "-Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align "
+			"-Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion "
+			"-Wlogical-op -Wuseless-cast -Wdouble-promotion "
+			"-Wformat=2")
+			# "-Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches "
+			# "-Wnull-dereference "
+		string(CONCAT CMAKE_EXE_LINKER_FLAGS "-pthread")
 	else()
 		message(STATUS "Entering Linux/else branch. We assume clang++.")
-# TODO: Use string(CONCAT CMAKE_CXX_FLAGS after updating cmake-gui!
-		set(CMAKE_CXX_FLAGS
-			"${CMAKE_CXX_FLAGS} -Wall -std=c++11 -D ${def_CMAKE_MYUSERNAME} -D ${def_CMAKE_MYHOSTNAME}")
-		set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pthread")
+		string(CONCAT CMAKE_CXX_FLAGS
+			"-std=c++11 -D${def_CMAKE_MYUSERNAME} -D${def_CMAKE_MYHOSTNAME} "
+		  "-Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align "
+			"-Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion "
+			"-Wnull-dereference "
+			"-Wformat=2")
+			# "-Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches "
+			# "-Wlogical-op -Wuseless-cast -Wdouble-promotion "
+		string(CONCAT CMAKE_EXE_LINKER_FLAGS "-pthread")
 	endif()
 elseif("${CMAKE_SYSTEM_NAME}" MATCHES "Darwin")
 	message(STATUS "Entering Darwin branch. We assume clang++.")
 	string(CONCAT CMAKE_CXX_FLAGS
-		"${CMAKE_CXX_FLAGS} -Wall -std=c++11 "
-		"-D${def_CMAKE_MYUSERNAME} -D${def_CMAKE_MYHOSTNAME}")
+		"-std=c++11 -D${def_CMAKE_MYUSERNAME} -D${def_CMAKE_MYHOSTNAME} "
+		"-Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align "
+		"-Wunused -Woverloaded-virtual -Wpedantic -Wconversion -Wsign-conversion "
+		"-Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches "
+		"-Wlogical-op -Wnull-dereference -Wuseless-cast -Wdouble-promotion "
+		"-Wformat=2")
 else()
 	message(FATAL_ERROR "Unknown system")
 endif()
