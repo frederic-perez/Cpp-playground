@@ -5,6 +5,21 @@
 
 namespace enums {
 
+// From https://stackoverflow.com/questions/26936640/how-to-implement-is-enum-class-type-trait
+//
+// is_enum_class -- begin
+//
+template <typename T, typename V = void>
+struct test : std::false_type {};
+  
+template <typename T>
+struct test<T, decltype((void)+T{})> : std::true_type {};
+  
+template <typename T>
+using is_enum_class = std::integral_constant<bool, !test<T>::value && std::is_enum<T>::value>;
+//
+// is_enum_class -- end
+
 template <class T>
 constexpr
 size_t
@@ -12,6 +27,7 @@ count_defined() {
   // Note: This works for
   // 1. consecutive enum values, starting with "zero"; if not > Specialize, and
   // 2. `undefined` must be the last value of the enum class
+  static_assert(is_enum_class<T>::value, "static_assert failed: Bad type--T should be an enum class");
   return static_cast<size_t>(T::undefined);
 }
 
