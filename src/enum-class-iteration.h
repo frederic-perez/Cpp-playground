@@ -1,6 +1,7 @@
 #pragma once
 
 #include <array>
+#include <string>
 
 namespace enums {
 
@@ -25,12 +26,8 @@ enum class Planet : uint8_t {
   Neptune,
   undefined
 };
-
-enum class Opposite : uint8_t {
-  yin,
-  yang,
-  undefined
-};
+std::string as_string(Planet);
+Planet as_planet(const std::string&);
 
 constexpr std::array<Planet, count_defined<Planet>()>
   all_defined_planets{{
@@ -44,6 +41,14 @@ constexpr std::array<Planet, count_defined<Planet>()>
     Planet::Neptune
   }};
 static_assert(all_defined_planets.back() != static_cast<Planet>(0), "static_assert failed: Bad array--check contents to satisfy correct size");
+
+enum class Opposite : uint8_t {
+  yin,
+  yang,
+  undefined
+};
+std::string as_string(Opposite);
+Opposite as_opposite(const std::string&);
 
 constexpr std::array<Opposite, count_defined<Opposite>()>
   all_defined_opposites{{
