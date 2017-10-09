@@ -4,7 +4,17 @@
 #include "enum-class-iteration.h"
 
 namespace enums {
-  
+
+#undef FPCX_TRY_NOT_ENUM_CLASS_AND_INT_20171009
+#if defined(FPCX_TRY_NOT_ENUM_CLASS_AND_INT_20171009)
+enum NotEnumClass { foo, bar, undefined };
+static constexpr std::array<const char*, count_defined<NotEnumClass>()>
+  text_not_enum_class{{ "foo", "bar" }};
+  // static_assert > compilation error (in count_defined<NotEnumClass>())
+
+const size_t num_defined_in_int = count_defined<int>(); // ditto
+#endif
+
 //
 // Planet
 //
