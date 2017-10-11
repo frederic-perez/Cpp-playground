@@ -2,8 +2,20 @@
 
 #include <array>
 #include <string>
+#include <type_traits> // std::underlying_type
 
 namespace enums {
+
+// From https://stackoverflow.com/questions/14589417/can-an-enum-class-be-converted-to-the-underlying-type
+//
+// as_integral -- begin
+//
+template<typename E>
+constexpr auto as_integral(E e) -> typename std::underlying_type<E>::type {
+  return static_cast<typename std::underlying_type<E>::type>(e);
+}
+//
+// -- as integral -- end
 
 // From https://stackoverflow.com/questions/26936640/how-to-implement-is-enum-class-type-trait
 //
@@ -73,6 +85,7 @@ constexpr std::array<Opposite, count_defined<Opposite>()>
   }};
 static_assert(all_defined_opposites.back() != static_cast<Opposite>(0), "static_assert failed: Bad array--check contents to satisfy correct size");
 
+void ExamplesOfEnumClassAsIntegral();
 void ExamplesOfEnumClassIteration();
 
 } // namespace enums
