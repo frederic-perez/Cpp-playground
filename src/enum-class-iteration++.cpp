@@ -1,7 +1,7 @@
 #include <cassert> // TODO: Use Boost instead of the good old <cassert>
 #include <iostream>
 
-#include "enum-class-iteration.h"
+#include "enum-class-iteration++.h"
 
 namespace enums {
 
@@ -76,19 +76,33 @@ Opposite as_opposite(const std::string& enum_value_str) {
 } // namespace enum
 
 void
+enums::ExamplesOfEnumClassAsIntegral() {
+  using namespace enums;
+  Planet planet = Planet::Earth;
+  std::cout << "planet Earth as string: " << as_string(planet)
+    << "; static_cast<uint>(as_integral(planet)): "
+    << static_cast<uint>(as_integral(planet)) << std::endl;
+  planet = Planet::undefined;
+  std::cout << "planet undefined as string: " << as_string(planet)
+    << "; static_cast<uint>(as_integral(planet)): "
+    << static_cast<uint>(as_integral(planet)) << '\n'
+    << std::endl;
+}
+
+void
 enums::ExamplesOfEnumClassIteration() {
   using namespace enums;
   std::cout
     << "all_defined_planets.size() = " << all_defined_planets.size() << "\n"
     << "count_defined<Planet>() = " << count_defined<Planet>() << std::endl;
-  for (const auto planet : all_defined_planets)
-    for (const auto opposite : all_defined_opposites) {
-      const std::string planet_str = as_string(planet);
-      const std::string opposite_str = as_string(opposite);
-      assert(planet == as_planet(planet_str)); // TODO: Use Boost here
-      assert(opposite == as_opposite(opposite_str)); // TODO: Use Boost here
-      std::cout << "planet as string: " << planet_str
-                << ", opposite as string: " << opposite_str
-                << std::endl;
-    }
+  for (const auto planet : all_defined_planets) {
+    const std::string planet_str = as_string(planet);
+    assert(planet == as_planet(planet_str)); // TODO: Use Boost here
+    std::cout << "planet as string: " << planet_str << std::endl;
+  }
+  for (const auto opposite : all_defined_opposites) {
+    const std::string opposite_str = as_string(opposite);
+    assert(opposite == as_opposite(opposite_str)); // TODO: Use Boost here
+    std::cout << "opposite as string: " << opposite_str << std::endl;
+  }
 }
