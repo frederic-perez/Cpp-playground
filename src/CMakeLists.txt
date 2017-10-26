@@ -30,7 +30,8 @@ endif ()
 
 set(SRC_LIST
 	enum-class-iteration++.cpp enum-class-iteration++.h
-	main.cpp
+  main.cpp
+  spy.cpp spy.h
 )
 
 add_executable(${PROJECT_NAME} ${SRC_LIST})
