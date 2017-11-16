@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CPP_PLAYGROUND_ENUM_CLASS_ITERATION_H
+#define CPP_PLAYGROUND_ENUM_CLASS_ITERATION_H
 
 #include <array>
 #include <string>
@@ -89,3 +90,5 @@ void ExamplesOfEnumClassAsIntegral();
 void ExamplesOfEnumClassIteration();
 
 } // namespace enums
+
+#endif // CPP_PLAYGROUND_ENUM_CLASS_ITERATION_H
