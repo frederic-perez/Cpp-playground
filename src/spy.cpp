@@ -1,10 +1,13 @@
 #include <fstream>
 #include <ios>
 #include <string>
-#include <unistd.h>
+#if defined(__linux__) || defined(__linux) || defined(linux) || defined(__gnu_linux__)
+#  include <unistd.h>
+#endif
 
 #include "spy.h"
 
+#if defined(__linux__) || defined(__linux) || defined(linux) || defined(__gnu_linux__)
 // Code based on
 // https://stackoverflow.com/questions/669438/how-to-get-memory-usage-at-run-time-in-c
 //
@@ -38,3 +41,4 @@ spy::process_memory_usage(size_t& vm_usage, size_t& resident_set) {
     sysconf(_SC_PAGE_SIZE) / 1024; // in case x86-64 is configured to use 2MB pages
   resident_set = static_cast<unsigned long>(rss) * static_cast<unsigned long>(page_size_kb);
 }
+#endif

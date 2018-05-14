@@ -75,6 +75,10 @@ Opposite as_opposite(const std::string& enum_value_str) {
 
 } // namespace enum
 
+#if defined(_WIN64)
+using uint = unsigned int;
+#endif
+
 void
 enums::ExamplesOfEnumClassAsIntegral() {
   using namespace enums;

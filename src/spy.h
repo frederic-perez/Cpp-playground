@@ -9,8 +9,10 @@
 
 namespace spy {
 
+#if defined(__linux__) || defined(__linux) || defined(linux) || defined(__gnu_linux__)
 void
 process_memory_usage(size_t& vm_usage, size_t& resident_set);
+#endif
 
 } // namespace spy
 
