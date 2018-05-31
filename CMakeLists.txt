@@ -1,10 +1,10 @@
-# -- CMake build rules
-
 cmake_minimum_required(VERSION 2.8)
 
 set(PROJECT_NAME "Cpp-playground")
 set(PROJECT_TYPE "CXX")
 project(${PROJECT_NAME} ${PROJECT_TYPE})
+
+set(CMAKE_VERBOSE_MAKEFILE TRUE)
 
 message(STATUS "CMAKE_C_PLATFORM_ID is ${CMAKE_C_PLATFORM_ID}")
 message(STATUS "CMAKE_SYSTEM_NAME is ${CMAKE_SYSTEM_NAME}")
@@ -140,5 +140,3 @@ endif(BUILD_TESTING)
 
 add_subdirectory(src)
 # add_subdirectory(data)
-
-# -- eof
