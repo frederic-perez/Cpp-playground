@@ -10,26 +10,27 @@ set(Boost_USE_STATIC_LIBS ON CACHE BOOL "Use statically-linked boost libraries")
 set(Boost_USE_MULTITHREADED ON)
 find_package(Boost) # <-- Use this simple line for using only headers
 # find_package(Boost
-# 	COMPONENTS
-# 		# lexicographically sorted
-# 		date_time
-# 		filesystem
-# 		locale
-# 		program_options
-# 		system
+#   COMPONENTS
+#     # lexicographically sorted
+#     date_time
+#     filesystem
+#     locale
+#     program_options
+#     system
 # )
 if (Boost_FOUND)
-	message(STATUS "Boost found:")
-	include_directories(${Boost_INCLUDE_DIRS})
-	message(STATUS "  Boost_INCLUDE_DIRS: ${Boost_INCLUDE_DIRS}")
-	message(STATUS "  Boost_LIBRARIES: ${Boost_LIBRARIES}
-	Note: Boost_LIBRARIES can be empty if no COMPONENTS are used.") # Used below
+  message(STATUS "Boost found:")
+  include_directories(${Boost_INCLUDE_DIRS})
+  message(STATUS "  Boost_INCLUDE_DIRS: ${Boost_INCLUDE_DIRS}")
+  message(STATUS "  Boost_LIBRARIES: ${Boost_LIBRARIES}
+  Note: Boost_LIBRARIES can be empty if no COMPONENTS are used.") # Used below
 else ()
-	message(FATAL_ERROR "Boost not found - Hint(?): ENV{BOOST_ROOT} is $ENV{BOOST_ROOT}")
+  message(FATAL_ERROR "Boost not found - Hint(?): ENV{BOOST_ROOT} is $ENV{BOOST_ROOT}")
 endif ()
 
 set(SRC_LIST
-	enum-class-iteration++.cpp enum-class-iteration++.h
+  convert-off-to-ply.cpp convert-off-to-ply.h
+  enum-class-iteration++.cpp enum-class-iteration++.h
   main.cpp
   spy.cpp spy.h
 )
@@ -39,20 +40,20 @@ add_executable(${PROJECT_NAME} ${SRC_LIST})
 # Link the executable to the required libraries
 
 target_link_libraries(${PROJECT_NAME}
-	${Boost_LIBRARIES}
-#	Other required 3rd party libraries would appear below (examples commented):
-#	${CMAKE_THREAD_LIBS_INIT}
-#	${OpenIGTLink_LIBRARIES}
-#	${ITK_LIBRARIES}
-#	${VTK_LIBRARIES}
+  ${Boost_LIBRARIES}
+#  Other required 3rd party libraries would appear below (examples commented):
+#  ${CMAKE_THREAD_LIBS_INIT}
+#  ${OpenIGTLink_LIBRARIES}
+#  ${ITK_LIBRARIES}
+#  ${VTK_LIBRARIES}
 )
 
 set(TARGET_NAME ${PROJECT_NAME}Targets)
 install(TARGETS ${PROJECT_NAME} # EXPORT ${TARGET_NAME}
-#	LIBRARY DESTINATION lib
-#	ARCHIVE DESTINATION lib
-	RUNTIME DESTINATION bin
-#	INCLUDES DESTINATION include
+#  LIBRARY DESTINATION lib
+#  ARCHIVE DESTINATION lib
+  RUNTIME DESTINATION bin
+#  INCLUDES DESTINATION include
 )
 
 # -- eof

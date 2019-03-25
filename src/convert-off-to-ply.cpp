@@ -1,0 +1,97 @@
+#include <fstream>
+#include <iostream>
+
+#if defined(_MSC_VER)
+  #include <iso646.h> // not
+#endif
+
+#include "convert-off-to-ply.h"
+
+namespace {
+
+void
+save_ply_header(std::ofstream& file_out, size_t num_points, size_t num_faces)
+{
+  file_out << "ply\n";
+
+  unsigned int an_int = 1;
+  char *ptr = (char*)&an_int;
+  file_out << "format "
+    << (ptr[0] == 1 ? "binary_little_endian" : "binary_big_endian") << " 1.0\n";
+
+  file_out
+    << "element vertex " << num_points << "\n"
+    << "property float x\n" 
+    << "property float y\n"
+    << "property float z\n"
+    << "element face " << num_faces << "\n"
+    << "property list uchar int vertex_indices\n"
+    << "end_header\n";
+}
+
+} // namespace
+
+void
+io::convert_ASCII_OFF_to_binary_PLY(
+  const std::string& filename_in_off,
+  const std::string& filename_out_ply)
+{
+  // From the main page http://www.holmes3d.net/graphics/offfiles/, (c) Ryan Holmes
+  // there is the link to http://www.holmes3d.net/graphics/offfiles/OFFLoading.txt
+  // from which we base the code of this function
+
+  std::ifstream file_in(filename_in_off);
+  if (not file_in.is_open()) {
+    std::cerr << "Could not open file `" << filename_in_off << "`. Exiting...\n";
+    return;
+  }
+
+  std::ofstream file_out(filename_out_ply, std::ios::out | std::ios::binary);
+  if (not file_out.is_open()) {
+    std::cerr << "Could not open file `" << filename_out_ply << "`. Exiting...\n";
+    return;
+  }
+
+  std::string word;
+  file_in >> word;
+  if (word != "OFF") {
+    std::cerr << "File `" << filename_out_ply << "` does not start with `OFF`. Exiting...\n";
+    return;
+  }
+
+  size_t num_points, num_faces, num_edges;
+  file_in >> num_points >> num_faces >> num_edges;
+
+  if (num_points < 1 || num_faces < 1) {
+    std::cerr << "File `" << filename_out_ply << "` has no points or no faces. Exiting...\n";
+    return;
+  }
+
+  save_ply_header(file_out, num_points, num_faces);
+
+  float point[3];
+  for (size_t i = 0; i < num_points; ++i) {
+    file_in >> point[0] >> point[1] >> point[2];
+    file_out.write(reinterpret_cast<char*>(&point), 3*sizeof(float));
+  }
+
+  size_t num_vertices;
+  int index;
+  char tempBuf[128];
+  for (size_t i = 0; i < num_faces; ++i) {
+    file_in >> num_vertices;
+    file_out.write(reinterpret_cast<const char*>(&num_vertices), sizeof(unsigned char));
+    for (size_t j = 0; j < num_vertices; ++j) {
+      file_in >> index;
+      file_out.write(reinterpret_cast<char*>(&index), sizeof(int));
+    }
+    // Clear out any face color data by reading up to
+    // the newline. 128 is probably considerably more
+    // space than necessary, but better safe than
+    // sorry.
+    file_in.getline(tempBuf, 128);
+  }
+
+  file_in.close();
+  file_out.close();
+}
