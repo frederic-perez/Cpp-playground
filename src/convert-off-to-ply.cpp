@@ -15,7 +15,7 @@ save_ply_header(std::ofstream& file_out, size_t num_points, size_t num_faces)
   file_out << "ply\n";
 
   unsigned int an_int = 1;
-  char *ptr = (char*)&an_int;
+  const auto* const ptr = reinterpret_cast<char*>(&an_int);
   file_out << "format "
     << (ptr[0] == 1 ? "binary_little_endian" : "binary_big_endian") << " 1.0\n";
 
