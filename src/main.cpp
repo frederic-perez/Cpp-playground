@@ -3,7 +3,9 @@
 #include <array>
 #include <iostream>
 
-#include "convert-off-to-ply.h"
+#include "convert-ASCII-OFF-to-binary-OFF.h"
+#include "convert-ASCII-OFF-to-binary-PLY.h"
+#include "convert-binary-OFF-to-binary-PLY.h"
 #include "enum-class-iteration++.h"
 #include "spy.h"
 
@@ -27,9 +29,17 @@ main(int /*argc*/, char* /*argv*/[])
     "boxcube", "dodecahedron", "icosahedron"
   }};
   for (const auto& filename_root : filename_roots) {
-    const std::string filename_in_off = filename_root + ".off";
-    const std::string filename_out_ply = filename_root + ".ply";
-    io::convert_ASCII_OFF_to_binary_PLY(filename_in_off, filename_out_ply);
+    std::clog << "Dealing with `" << filename_root << "`:" << std::endl;
+    const std::string filename_in_ASCII_OFF = filename_root + "-ASCII.off";
+    const std::string filename_out_from_ASCII_OFF_to_binary_PLY = filename_root + "--from-ASCII-OFF--binary.ply";
+    io::convert_ASCII_OFF_to_binary_PLY(filename_in_ASCII_OFF, filename_out_from_ASCII_OFF_to_binary_PLY);
+
+    const std::string filename_out_from_ASCII_OFF_to_binary_OFF = filename_root + "--from-ASCII-OFF--binary.off";
+    io::convert_ASCII_OFF_to_binary_OFF(filename_in_ASCII_OFF, filename_out_from_ASCII_OFF_to_binary_OFF);
+
+    const std::string filename_out_from_binary_OFF_to_binary_PLY = filename_root + "--from-binary-OFF--binary.ply";
+    io::convert_binary_OFF_to_binary_PLY(filename_out_from_ASCII_OFF_to_binary_OFF, filename_out_from_binary_OFF_to_binary_PLY);
+    std::clog << std::endl;
   }
 
   std::cout << "Bye, Cpp-playground!" << std::endl;

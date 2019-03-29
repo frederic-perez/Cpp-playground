@@ -29,7 +29,9 @@ else ()
 endif ()
 
 set(SRC_LIST
-  convert-off-to-ply.cpp convert-off-to-ply.h
+  convert-ASCII-OFF-to-binary-OFF.cpp convert-ASCII-OFF-to-binary-OFF.h
+  convert-ASCII-OFF-to-binary-PLY.cpp convert-ASCII-OFF-to-binary-PLY.h
+  convert-binary-OFF-to-binary-PLY.cpp convert-binary-OFF-to-binary-PLY.h
   enum-class-iteration++.cpp enum-class-iteration++.h
   main.cpp
   spy.cpp spy.h

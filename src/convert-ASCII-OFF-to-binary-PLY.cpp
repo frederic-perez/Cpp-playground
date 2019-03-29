@@ -5,7 +5,7 @@
   #include <iso646.h> // not
 #endif
 
-#include "convert-off-to-ply.h"
+#include "convert-ASCII-OFF-to-binary-PLY.h"
 
 namespace {
 
@@ -36,6 +36,8 @@ io::convert_ASCII_OFF_to_binary_PLY(
   const std::string& filename_in_off,
   const std::string& filename_out_ply)
 {
+  std::clog << __func__ << " starts..." << std::endl;
+
   // From the main page http://www.holmes3d.net/graphics/offfiles/, (c) Ryan Holmes
   // there is the link to http://www.holmes3d.net/graphics/offfiles/OFFLoading.txt
   // from which we base the code of this function
@@ -55,7 +57,7 @@ io::convert_ASCII_OFF_to_binary_PLY(
   std::string word;
   file_in >> word;
   if (word != "OFF") {
-    std::cerr << "File `" << filename_out_ply << "` does not start with `OFF`. Exiting...\n";
+    std::cerr << "File `" << filename_in_off << "` does not start with `OFF`. Exiting...\n";
     return;
   }
 
@@ -63,7 +65,7 @@ io::convert_ASCII_OFF_to_binary_PLY(
   file_in >> num_points >> num_faces >> num_edges;
 
   if (num_points < 1 || num_faces < 1) {
-    std::cerr << "File `" << filename_out_ply << "` has no points or no faces. Exiting...\n";
+    std::cerr << "File `" << filename_in_off << "` has no points or no faces. Exiting...\n";
     return;
   }
 
@@ -94,4 +96,6 @@ io::convert_ASCII_OFF_to_binary_PLY(
 
   file_in.close();
   file_out.close();
+
+  std::clog << __func__ << " finished" << std::endl;
 }
