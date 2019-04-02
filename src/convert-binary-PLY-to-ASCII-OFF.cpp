@@ -18,32 +18,38 @@ outputErrorAndReturnFalse(const std::string& message)
   return false;
 }
 
+void
+getline_and_update(
+  std::ifstream& file_in,
+  std::istringstream& iss)
+{
+  static std::string line;
+  getline(file_in, line);
+  iss.clear();
+  iss.str(line);
+}
+
 bool
 read_ply_header(
   std::ifstream& file_in,
   int& num_points,
   int& num_faces)
 {
-  std::string line;
-  getline(file_in, line);
-  std::istringstream iss(line);
+  std::istringstream iss;
+  getline_and_update(file_in, iss);
   std::string word_1, word_2, word_3, word_4, word_5;
   iss >> word_1;
   if (word_1 != "ply" && word_1 != "PLY") {
     return outputErrorAndReturnFalse("Expected `ply` or `PLY` keyword.");
   }
 
-  getline(file_in, line);
-  iss.clear();
-  iss.str(line);
+  getline_and_update(file_in, iss);
   iss >> word_1 >> word_2 >> word_3;
   if (word_1 != "format" or word_2 != "binary_little_endian" or word_3 != "1.0") {
     return outputErrorAndReturnFalse("Expected `format binary_little_endian 1.0`");
   }
 
-  getline(file_in, line);
-  iss.clear();
-  iss.str(line);
+  getline_and_update(file_in, iss);
   iss >> word_1 >> word_2 >> num_points;
   if (word_1 != "element" or word_2 != "vertex") {
     return outputErrorAndReturnFalse("Expected `element vertex <n>`");
@@ -51,9 +57,7 @@ read_ply_header(
 
   const std::array<char, 3> axes{ {'x', 'y', 'z'} };
   for (const auto axis : axes) {
-    getline(file_in, line);
-    iss.clear();
-    iss.str(line);
+    getline_and_update(file_in, iss);
     char c;
     iss >> word_1 >> word_2 >> c;
     if (word_1 != "property" or word_2 != "float" or c != axis) {
@@ -61,25 +65,19 @@ read_ply_header(
     }
   }
 
-  getline(file_in, line);
-  iss.clear();
-  iss.str(line);
+  getline_and_update(file_in, iss);
   iss >> word_1 >> word_2 >> num_faces;
   if (word_1 != "element" or word_2 != "face") {
     return outputErrorAndReturnFalse("Expected `element face <n>`");
   }
 
-  getline(file_in, line);
-  iss.clear();
-  iss.str(line);
+  getline_and_update(file_in, iss);
   iss >> word_1 >> word_2 >> word_3 >> word_4 >> word_5;
   if (word_1 != "property" or word_2 != "list" or word_3 != "uchar" or word_4 != "int" or word_5 != "vertex_indices") {
     return outputErrorAndReturnFalse("Expected `property list uchar int vertex_indices`");
   }
 
-  getline(file_in, line);
-  iss.clear();
-  iss.str(line);
+  getline_and_update(file_in, iss);
   iss >> word_1;
   if (word_1 != "end_header") {
     return outputErrorAndReturnFalse("Expected `end_header`");
@@ -114,7 +112,7 @@ io::convert_binary_PLY_to_ASCII_OFF(
   int num_points = 0, num_faces = 0, num_edges = 0;
   const bool succeeded = read_ply_header(file_in, num_points, num_faces);
   if (not succeeded) {
-    std::cerr << "Could not parse the header from file `" << filename_out_off << "`. Exiting...\n";
+    std::cerr << "Could not parse the header from file `" << filename_in_ply << "`. Exiting...\n";
     return;
   }
   if (num_points < 1 or num_faces < 1) {
