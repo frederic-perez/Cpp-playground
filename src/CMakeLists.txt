@@ -31,6 +31,7 @@ endif ()
 set(SRC_LIST
   convert-ASCII-OFF-to-binary-OFF.cpp convert-ASCII-OFF-to-binary-OFF.h
   convert-ASCII-OFF-to-binary-PLY.cpp convert-ASCII-OFF-to-binary-PLY.h
+  convert-ASCII-PLY-to-binary-PLY.cpp convert-ASCII-PLY-to-binary-PLY.h
   convert-binary-OFF-to-binary-PLY.cpp convert-binary-OFF-to-binary-PLY.h
   convert-binary-PLY-to-ASCII-OFF.cpp convert-binary-PLY-to-ASCII-OFF.h
   enum-class-iteration++.cpp enum-class-iteration++.h

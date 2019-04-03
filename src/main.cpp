@@ -5,6 +5,7 @@
 
 #include "convert-ASCII-OFF-to-binary-OFF.h"
 #include "convert-ASCII-OFF-to-binary-PLY.h"
+#include "convert-ASCII-PLY-to-binary-PLY.h"
 #include "convert-binary-OFF-to-binary-PLY.h"
 #include "convert-binary-PLY-to-ASCII-OFF.h"
 #include "enum-class-iteration++.h"
@@ -17,7 +18,8 @@ main(int argc, char* argv[])
     const std::string filename_in = argv[1];
     const std::string filename_out = argv[2];
     //io::convert_ASCII_OFF_to_binary_OFF(filename_in, filename_out);
-    io::convert_ASCII_OFF_to_binary_PLY(filename_in, filename_out);
+    //io::convert_ASCII_OFF_to_binary_PLY(filename_in, filename_out);
+    io::convert_ASCII_PLY_to_binary_PLY(filename_in, filename_out);
     return EXIT_SUCCESS;
   }
 
