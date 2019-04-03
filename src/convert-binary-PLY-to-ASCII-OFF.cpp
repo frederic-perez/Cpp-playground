@@ -23,7 +23,8 @@ getline_and_update(
   std::ifstream& file_in,
   std::istringstream& iss)
 {
-  static std::string line;
+  std::string line;
+  // '- This object can't be static to allow parallel calls to `read_ply_header`
   getline(file_in, line);
   iss.clear();
   iss.str(line);
