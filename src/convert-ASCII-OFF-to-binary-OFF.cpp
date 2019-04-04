@@ -62,7 +62,7 @@ io::convert_ASCII_OFF_to_binary_OFF(
   for (size_t i = 0; i < num_points; ++i) {
     file_in >> point[0] >> point[1] >> point[2];
     oss << point[0] << ' ' << point[1] << ' ' << point[2] << std::endl;
-    file_out.write(reinterpret_cast<char*>(&point), 3*sizeof(float));
+    file_out.write(reinterpret_cast<char*>(&point), sizeof(point));
   }
 
   int num_vertices, index;

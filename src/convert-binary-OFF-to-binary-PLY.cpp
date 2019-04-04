@@ -85,9 +85,9 @@ io::convert_binary_OFF_to_binary_PLY(
 
   float point[3];
   for (int i = 0; i < num_points; ++i) {
-    file_in.read(reinterpret_cast<char*>(&point), 3*sizeof(float));
+    file_in.read(reinterpret_cast<char*>(&point), sizeof(point));
     oss << point[0] << ' ' << point[1] << ' ' << point[2] << std::endl;
-    file_out.write(reinterpret_cast<char*>(&point), 3*sizeof(float));
+    file_out.write(reinterpret_cast<char*>(&point), sizeof(point));
   }
 
   int num_vertices, index;

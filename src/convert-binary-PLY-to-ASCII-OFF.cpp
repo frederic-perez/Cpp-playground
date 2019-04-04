@@ -128,7 +128,7 @@ io::convert_binary_PLY_to_ASCII_OFF(
 
   float point[3];
   for (int i = 0; i < num_points; ++i) {
-    file_in.read(reinterpret_cast<char*>(&point), 3*sizeof(float));
+    file_in.read(reinterpret_cast<char*>(&point), sizeof(point));
     if (!file_in) {
       std::cerr << "Error: When i = " << i << ", only " << file_in.gcount()
         << " elements could be read -- Exiting...\n";

@@ -74,7 +74,7 @@ io::convert_ASCII_OFF_to_binary_PLY(
   float point[3];
   for (size_t i = 0; i < num_points; ++i) {
     file_in >> point[0] >> point[1] >> point[2];
-    file_out.write(reinterpret_cast<char*>(&point), 3*sizeof(float));
+    file_out.write(reinterpret_cast<char*>(&point), sizeof(point));
   }
 
   size_t num_vertices;
