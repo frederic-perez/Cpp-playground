@@ -59,7 +59,7 @@ io::convert_ASCII_OFF_to_binary_OFF(
   file_out.write(reinterpret_cast<char*>(&num_edges), sizeof(int));
 
   float point[3];
-  for (size_t i = 0; i < num_points; ++i) {
+  for (int i = 0; i < num_points; ++i) {
     file_in >> point[0] >> point[1] >> point[2];
     oss << point[0] << ' ' << point[1] << ' ' << point[2] << std::endl;
     file_out.write(reinterpret_cast<char*>(&point), sizeof(point));
@@ -67,11 +67,11 @@ io::convert_ASCII_OFF_to_binary_OFF(
 
   int num_vertices, index;
   std::string rest_of_line;
-  for (size_t i = 0; i < num_faces; ++i) {
+  for (int i = 0; i < num_faces; ++i) {
     file_in >> num_vertices;
     oss << "<<" << i << ">> " << num_vertices << ' ';
     file_out.write(reinterpret_cast<const char*>(&num_vertices), sizeof(num_vertices));
-    for (size_t j = 0; j < num_vertices; ++j) {
+    for (int j = 0; j < num_vertices; ++j) {
       file_in >> index;
       oss << index << ' ';
       file_out.write(reinterpret_cast<char*>(&index), sizeof(index));

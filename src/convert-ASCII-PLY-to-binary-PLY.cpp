@@ -116,8 +116,8 @@ void
 save_ply_header(
   std::ofstream& file_out,
   const std::string& texture_filename,
-  size_t num_points,
-  size_t num_faces)
+  int num_points,
+  int num_faces)
 {
   file_out << "ply\n";
 
@@ -179,7 +179,7 @@ io::convert_ASCII_PLY_to_binary_PLY(
   save_ply_header(file_out, texture_filename, num_points, num_faces);
 
   float point_n_uv[3 + 3 + 2];
-  for (size_t i = 0; i < num_points; ++i) {
+  for (int i = 0; i < num_points; ++i) {
     file_in
       >> point_n_uv[0] >> point_n_uv[1] >> point_n_uv[2] // x, y, z
       >> point_n_uv[3] >> point_n_uv[4] >> point_n_uv[5] // nx, ny, nz
@@ -190,7 +190,7 @@ io::convert_ASCII_PLY_to_binary_PLY(
   size_t num_vertices;
   int index;
   char tempBuf[128];
-  for (size_t i = 0; i < num_faces; ++i) {
+  for (int i = 0; i < num_faces; ++i) {
     file_in >> num_vertices;
     file_out.write(reinterpret_cast<const char*>(&num_vertices), sizeof(unsigned char));
     for (size_t j = 0; j < num_vertices; ++j) {
