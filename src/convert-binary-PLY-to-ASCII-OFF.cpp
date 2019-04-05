@@ -139,10 +139,10 @@ io::convert_binary_PLY_to_ASCII_OFF(
   }
 
   unsigned char num_vertices_uc;
-  int num_vertices, index;
+  int index;
   for (int i = 0; i < num_faces; ++i) {
     file_in.read(reinterpret_cast<char*>(&num_vertices_uc), sizeof(unsigned char));
-    num_vertices = static_cast<int>(num_vertices_uc);
+    const auto num_vertices = static_cast<int>(num_vertices_uc);
     oss << "<<" << i << ">> " << num_vertices << ' ';
     file_out << num_vertices << ' ';
     for (int j = 0; j < num_vertices; ++j) {
