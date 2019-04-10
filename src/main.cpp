@@ -11,18 +11,31 @@
 #include "enum-class-iteration++.h"
 #include "spy.h"
 
+#undef FPCX_JUST_ASCII_OFF_TO_BINARY_PLY_20190410
+#if defined(FPCX_JUST_ASCII_OFF_TO_BINARY_PLY_20190410)
+
 int
 main(int argc, char* argv[])
 {
-  if (argc == 3) {
-    const std::string filename_in = argv[1];
-    const std::string filename_out = argv[2];
-    //io::convert_ASCII_OFF_to_binary_OFF(filename_in, filename_out);
-    //io::convert_ASCII_OFF_to_binary_PLY(filename_in, filename_out);
-    io::convert_ASCII_PLY_to_binary_PLY(filename_in, filename_out);
-    return EXIT_SUCCESS;
+  if (argc != 3) {
+    std::cerr
+      << "Error: Wrong number of parameters\n"
+      << "Usage: <progname> <filename-ASCII.off> <filename-binary.ply>\n";
+    return EXIT_FAILURE;
   }
+  const std::string filename_in = argv[1];
+  const std::string filename_out = argv[2];
+  //io::convert_ASCII_OFF_to_binary_OFF(filename_in, filename_out);
+  io::convert_ASCII_OFF_to_binary_PLY(filename_in, filename_out);
+  //io::convert_ASCII_PLY_to_binary_PLY(filename_in, filename_out);
+  return EXIT_SUCCESS;
+}
 
+#else
+
+int
+main(int, char*[])
+{
   std::cout << "Hello, Cpp-playground!\n" << std::endl;
 
   enums::ExamplesOfEnumClassAsIntegral();
@@ -36,9 +49,9 @@ main(int argc, char* argv[])
     << std::endl;
 #endif
 
-  const std::array<std::string, 3> filename_roots{{
+  const std::array<std::string, 3> filename_roots{ {
     "boxcube", "dodecahedron", "icosahedron"
-  }};
+  } };
   for (const auto& filename_root : filename_roots) {
     std::clog << "Dealing with `" << filename_root << "`:" << std::endl;
 
@@ -61,5 +74,7 @@ main(int argc, char* argv[])
   std::cout << "Bye, Cpp-playground!" << std::endl;
   return EXIT_SUCCESS;
 }
+
+#endif
 
 // -- eof
