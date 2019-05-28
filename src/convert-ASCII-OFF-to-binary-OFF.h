@@ -5,10 +5,7 @@
 
 namespace io {
 
-void
-convert_ASCII_OFF_to_binary_OFF(
-  const std::string& filename_in,
-  const std::string& filename_out);
+void convert_ASCII_OFF_to_binary_OFF(const std::string& filename_in, const std::string& filename_out);
 
 } // namespace io
 

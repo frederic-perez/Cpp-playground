@@ -4,7 +4,7 @@
 #include <sstream>
 
 #if defined(_MSC_VER)
-  #include <iso646.h> // not
+#  include <iso646.h> // not
 #endif
 
 #include "convert-binary-PLY-to-ASCII-OFF.h"
@@ -19,9 +19,7 @@ outputErrorAndReturnFalse(const std::string& message)
 }
 
 void
-getline_and_update(
-  std::ifstream& file_in,
-  std::istringstream& iss)
+getline_and_update(std::ifstream& file_in, std::istringstream& iss)
 {
   std::string line;
   // '- This object can't be static to allow parallel calls to `read_ply_header`
@@ -31,10 +29,7 @@ getline_and_update(
 }
 
 bool
-read_ply_header(
-  std::ifstream& file_in,
-  int& num_points,
-  int& num_faces)
+read_ply_header(std::ifstream& file_in, int& num_points, int& num_faces)
 {
   std::istringstream iss;
   getline_and_update(file_in, iss);
@@ -56,7 +51,7 @@ read_ply_header(
     return outputErrorAndReturnFalse("Expected `element vertex <n>`");
   }
 
-  const std::array<char, 3> axes{ {'x', 'y', 'z'} };
+  const std::array<char, 3> axes{{'x', 'y', 'z'}};
   for (const auto axis : axes) {
     getline_and_update(file_in, iss);
     char c;
@@ -90,9 +85,7 @@ read_ply_header(
 } // namespace
 
 void
-io::convert_binary_PLY_to_ASCII_OFF(
-  const std::string& filename_in_ply,
-  const std::string& filename_out_off)
+io::convert_binary_PLY_to_ASCII_OFF(const std::string& filename_in_ply, const std::string& filename_out_off)
 {
   std::clog << __func__ << " starts..." << std::endl;
 
@@ -131,7 +124,7 @@ io::convert_binary_PLY_to_ASCII_OFF(
     file_in.read(reinterpret_cast<char*>(&point), sizeof(point));
     if (!file_in) {
       std::cerr << "Error: When i = " << i << ", only " << file_in.gcount()
-        << " elements could be read -- Exiting...\n";
+                << " elements could be read -- Exiting...\n";
       return;
     }
     oss << point[0] << ' ' << point[1] << ' ' << point[2] << std::endl;
@@ -149,7 +142,7 @@ io::convert_binary_PLY_to_ASCII_OFF(
       file_in.read(reinterpret_cast<char*>(&index), sizeof(index));
       if (!file_in) {
         std::cerr << "Error: When i = " << i << ", only " << file_in.gcount()
-          << " elements could be read -- Exiting...\n";
+                  << " elements could be read -- Exiting...\n";
         return;
       }
       oss << index;

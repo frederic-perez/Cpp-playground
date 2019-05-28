@@ -3,15 +3,13 @@
 #include <sstream>
 
 #if defined(_MSC_VER)
-  #include <iso646.h> // not
+#  include <iso646.h> // not
 #endif
 
 #include "convert-ASCII-OFF-to-binary-OFF.h"
 
 void
-io::convert_ASCII_OFF_to_binary_OFF(
-  const std::string& filename_in,
-  const std::string& filename_out)
+io::convert_ASCII_OFF_to_binary_OFF(const std::string& filename_in, const std::string& filename_out)
 {
   std::clog << __func__ << " starts..." << std::endl;
 
@@ -76,8 +74,8 @@ io::convert_ASCII_OFF_to_binary_OFF(
       oss << index << ' ';
       file_out.write(reinterpret_cast<char*>(&index), sizeof(index));
       if (file_out.bad()) {
-        std::cerr << "Error: When i = " << i << " and j = " << j << ", writing to `"
-          << filename_out << "` failed -- Exiting...\n";
+        std::cerr << "Error: When i = " << i << " and j = " << j << ", writing to `" << filename_out
+                  << "` failed -- Exiting...\n";
         return;
       }
     }

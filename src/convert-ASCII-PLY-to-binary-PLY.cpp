@@ -4,7 +4,7 @@
 #include <sstream>
 
 #if defined(_MSC_VER)
-  #include <iso646.h> // not
+#  include <iso646.h> // not
 #endif
 
 #include "convert-ASCII-PLY-to-binary-PLY.h"
@@ -19,9 +19,7 @@ outputErrorAndReturnFalse(const std::string& message)
 }
 
 void
-getline_and_update(
-  std::ifstream& file_in,
-  std::istringstream& iss)
+getline_and_update(std::ifstream& file_in, std::istringstream& iss)
 {
   std::string line;
   // '- This object can't be static to allow parallel calls to `read_ply_header`
@@ -31,11 +29,7 @@ getline_and_update(
 }
 
 bool
-read_ply_header(
-  std::ifstream& file_in,
-  std::string& texture_filename,
-  int& num_points,
-  int& num_faces)
+read_ply_header(std::ifstream& file_in, std::string& texture_filename, int& num_points, int& num_faces)
 {
   std::istringstream iss;
   getline_and_update(file_in, iss);
@@ -63,7 +57,7 @@ read_ply_header(
     return outputErrorAndReturnFalse("Expected `element vertex <n>`");
   }
 
-  const std::array<char, 3> axes{ { 'x', 'y', 'z' } };
+  const std::array<char, 3> axes{{'x', 'y', 'z'}};
   for (const auto axis : axes) {
     getline_and_update(file_in, iss);
     char c;
@@ -73,7 +67,7 @@ read_ply_header(
     }
   }
 
-  const std::array<std::string, 3> n_axes{ { "nx", "ny", "nz" } };
+  const std::array<std::string, 3> n_axes{{"nx", "ny", "nz"}};
   for (const auto& n_axis : n_axes) {
     getline_and_update(file_in, iss);
     iss >> word_1 >> word_2 >> word_3;
@@ -82,7 +76,7 @@ read_ply_header(
     }
   }
 
-  const std::array<std::string, 2> textures{ { "texture_u", "texture_v" } };
+  const std::array<std::string, 2> textures{{"texture_u", "texture_v"}};
   for (const auto& texture : textures) {
     getline_and_update(file_in, iss);
     iss >> word_1 >> word_2 >> word_3;
@@ -113,41 +107,33 @@ read_ply_header(
 }
 
 void
-save_ply_header(
-  std::ofstream& file_out,
-  const std::string& texture_filename,
-  int num_points,
-  int num_faces)
+save_ply_header(std::ofstream& file_out, const std::string& texture_filename, int num_points, int num_faces)
 {
   file_out << "ply\n";
 
   unsigned int an_int = 1;
   const auto* const ptr = reinterpret_cast<char*>(&an_int);
-  file_out << "format "
-    << (ptr[0] == 1 ? "binary_little_endian" : "binary_big_endian") << " 1.0\n";
+  file_out << "format " << (ptr[0] == 1 ? "binary_little_endian" : "binary_big_endian") << " 1.0\n";
 
-  file_out
-    << "comment TextureFile " << texture_filename << '\n'
-    << "element vertex " << num_points << '\n'
-    << "property float x\n"
-    << "property float y\n"
-    << "property float z\n"
-    << "property float nx\n"
-    << "property float ny\n"
-    << "property float nz\n"
-    << "property float texture_u\n"
-    << "property float texture_v\n"
-    << "element face " << num_faces << '\n'
-    << "property list uchar int vertex_indices\n"
-    << "end_header\n";
+  file_out << "comment TextureFile " << texture_filename << '\n'
+           << "element vertex " << num_points << '\n'
+           << "property float x\n"
+           << "property float y\n"
+           << "property float z\n"
+           << "property float nx\n"
+           << "property float ny\n"
+           << "property float nz\n"
+           << "property float texture_u\n"
+           << "property float texture_v\n"
+           << "element face " << num_faces << '\n'
+           << "property list uchar int vertex_indices\n"
+           << "end_header\n";
 }
 
 } // namespace
 
 void
-io::convert_ASCII_PLY_to_binary_PLY(
-  const std::string& filename_in,
-  const std::string& filename_out)
+io::convert_ASCII_PLY_to_binary_PLY(const std::string& filename_in, const std::string& filename_out)
 {
   std::clog << __func__ << " starts..." << std::endl;
 
@@ -165,8 +151,7 @@ io::convert_ASCII_PLY_to_binary_PLY(
 
   std::string texture_filename;
   int num_points = 0, num_faces = 0;
-  const bool succeeded =
-    read_ply_header(file_in, texture_filename, num_points, num_faces);
+  const bool succeeded = read_ply_header(file_in, texture_filename, num_points, num_faces);
   if (not succeeded) {
     std::cerr << "Could not parse the header from file `" << filename_in << "`. Exiting...\n";
     return;
@@ -180,10 +165,9 @@ io::convert_ASCII_PLY_to_binary_PLY(
 
   float point_n_uv[3 + 3 + 2];
   for (int i = 0; i < num_points; ++i) {
-    file_in
-      >> point_n_uv[0] >> point_n_uv[1] >> point_n_uv[2] // x, y, z
+    file_in >> point_n_uv[0] >> point_n_uv[1] >> point_n_uv[2] // x, y, z
       >> point_n_uv[3] >> point_n_uv[4] >> point_n_uv[5] // nx, ny, nz
-      >> point_n_uv[6] >> point_n_uv[7];                 // u, v
+      >> point_n_uv[6] >> point_n_uv[7]; // u, v
     file_out.write(reinterpret_cast<char*>(&point_n_uv), sizeof(point_n_uv));
   }
 

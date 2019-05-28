@@ -2,7 +2,7 @@
 #include <iostream>
 
 #if defined(_MSC_VER)
-  #include <iso646.h> // not
+#  include <iso646.h> // not
 #endif
 
 #include "convert-ASCII-OFF-to-binary-PLY.h"
@@ -16,25 +16,21 @@ save_ply_header(std::ofstream& file_out, size_t num_points, size_t num_faces)
 
   unsigned int an_int = 1;
   const auto* const ptr = reinterpret_cast<char*>(&an_int);
-  file_out << "format "
-    << (ptr[0] == 1 ? "binary_little_endian" : "binary_big_endian") << " 1.0\n";
+  file_out << "format " << (ptr[0] == 1 ? "binary_little_endian" : "binary_big_endian") << " 1.0\n";
 
-  file_out
-    << "element vertex " << num_points << "\n"
-    << "property float x\n" 
-    << "property float y\n"
-    << "property float z\n"
-    << "element face " << num_faces << "\n"
-    << "property list uchar int vertex_indices\n"
-    << "end_header\n";
+  file_out << "element vertex " << num_points << "\n"
+           << "property float x\n"
+           << "property float y\n"
+           << "property float z\n"
+           << "element face " << num_faces << "\n"
+           << "property list uchar int vertex_indices\n"
+           << "end_header\n";
 }
 
 } // namespace
 
 void
-io::convert_ASCII_OFF_to_binary_PLY(
-  const std::string& filename_in_off,
-  const std::string& filename_out_ply)
+io::convert_ASCII_OFF_to_binary_PLY(const std::string& filename_in_off, const std::string& filename_out_ply)
 {
   std::clog << __func__ << " starts..." << std::endl;
 
