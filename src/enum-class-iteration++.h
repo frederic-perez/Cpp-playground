@@ -18,7 +18,7 @@ as_integral(E e) -> typename std::underlying_type<E>::type
   return static_cast<typename std::underlying_type<E>::type>(e);
 }
 //
-// -- as integral -- end
+// as integral -- end
 
 // From https://stackoverflow.com/questions/26936640/how-to-implement-is-enum-class-type-trait
 //

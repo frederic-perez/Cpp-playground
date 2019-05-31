@@ -1,5 +1,3 @@
-// --
-
 #include <array>
 #include <iostream>
 
@@ -74,5 +72,3 @@ main(int, char*[])
 }
 
 #endif
-
-// -- eof
