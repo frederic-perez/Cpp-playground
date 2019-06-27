@@ -1,3 +1,4 @@
+#include <array>
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -42,7 +43,9 @@ io::convert_ASCII_OFF_to_binary_OFF(const std::string& filename_in, const std::s
 
   file_out << "OFF BINARY\n";
 
-  int num_points, num_faces, num_edges;
+  int num_points;
+  int num_faces;
+  int num_edges;
   file_in >> num_points >> num_faces >> num_edges;
 
   if (num_points < 1 || num_faces < 1) {
@@ -56,14 +59,15 @@ io::convert_ASCII_OFF_to_binary_OFF(const std::string& filename_in, const std::s
   file_out.write(reinterpret_cast<char*>(&num_faces), sizeof(int));
   file_out.write(reinterpret_cast<char*>(&num_edges), sizeof(int));
 
-  float point[3];
+  std::array<float, 3> point;
   for (int i = 0; i < num_points; ++i) {
     file_in >> point[0] >> point[1] >> point[2];
     oss << point[0] << ' ' << point[1] << ' ' << point[2] << std::endl;
     file_out.write(reinterpret_cast<char*>(&point), sizeof(point));
   }
 
-  int num_vertices, index;
+  int num_vertices;
+  int index;
   std::string rest_of_line;
   for (int i = 0; i < num_faces; ++i) {
     file_in >> num_vertices;
