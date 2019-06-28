@@ -1,3 +1,4 @@
+#include <array>
 #include <fstream>
 #include <iostream>
 
@@ -57,7 +58,9 @@ io::convert_ASCII_OFF_to_binary_PLY(const std::string& filename_in_off, const st
     return;
   }
 
-  size_t num_points, num_faces, num_edges;
+  size_t num_points;
+  size_t num_faces;
+  size_t num_edges;
   file_in >> num_points >> num_faces >> num_edges;
 
   if (num_points < 1 || num_faces < 1) {
@@ -67,7 +70,7 @@ io::convert_ASCII_OFF_to_binary_PLY(const std::string& filename_in_off, const st
 
   save_ply_header(file_out, num_points, num_faces);
 
-  float point[3];
+  std::array<float, 3> point;
   for (size_t i = 0; i < num_points; ++i) {
     file_in >> point[0] >> point[1] >> point[2];
     file_out.write(reinterpret_cast<char*>(&point), sizeof(point));
@@ -75,7 +78,8 @@ io::convert_ASCII_OFF_to_binary_PLY(const std::string& filename_in_off, const st
 
   size_t num_vertices;
   int index;
-  char tempBuf[128];
+  constexpr size_t one_two_eight = 128;
+  char tempBuf[one_two_eight];
   for (size_t i = 0; i < num_faces; ++i) {
     file_in >> num_vertices;
     file_out.write(reinterpret_cast<const char*>(&num_vertices), sizeof(unsigned char));
@@ -87,7 +91,7 @@ io::convert_ASCII_OFF_to_binary_PLY(const std::string& filename_in_off, const st
     // the newline. 128 is probably considerably more
     // space than necessary, but better safe than
     // sorry.
-    file_in.getline(tempBuf, 128);
+    file_in.getline(tempBuf, one_two_eight);
   }
 
   file_in.close();
