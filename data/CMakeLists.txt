@@ -9,7 +9,7 @@ set(SRC_LIST
 )
 
 install(FILES ${SRC_LIST}
-	DESTINATION bin
+  DESTINATION bin
 )
 
 # -- eof
