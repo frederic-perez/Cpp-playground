@@ -6,6 +6,8 @@
 #  include <iso646.h> // not
 #endif
 
+#include <boost/assert.hpp>
+
 #include "convert-binary-OFF-to-binary-PLY.h"
 
 namespace {
@@ -108,6 +110,7 @@ io::convert_binary_OFF_to_binary_PLY(const std::string& filename_in_off, const s
   file_out.close();
 
   if (const bool spy = false) {
+    BOOST_VERIFY(spy); // To avoid compiler warning
     std::clog << "Contents of input file was found to be as follows:\n" << oss.str();
   }
 

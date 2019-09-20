@@ -3,6 +3,8 @@
 #include <iostream>
 #include <sstream>
 
+#include <boost/assert.hpp>
+
 #if defined(_MSC_VER)
 #  include <iso646.h> // not
 #endif
@@ -99,6 +101,7 @@ io::convert_ASCII_OFF_to_binary_OFF(const std::string& filename_in, const std::s
   }
 
   if (const bool spy = false) {
+    BOOST_VERIFY(spy); // To avoid compiler warning
     std::clog << "Contents of input file was found to be as follows:\n" << oss.str();
   }
 
