@@ -30,8 +30,9 @@ main(int argc, char* argv[])
 
 #else
 
-int
+auto
 main(int, char*[])
+-> int
 {
   std::cout << "Hello, Cpp-playground!\n" << std::endl;
 
