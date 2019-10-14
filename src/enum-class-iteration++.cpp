@@ -22,19 +22,23 @@ static constexpr std::array<const char*, count_defined<Planet>()> text_planet{
   {"Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"}};
 static_assert(text_planet.back() != nullptr, "Bad array--check commas!");
 
-std::string
+auto
 as_string(Planet input)
+-> std::string
 {
   return input == decltype(input)::undefined ? "undefined" : text_planet.at(static_cast<size_t>(input));
 }
 
-Planet
+auto
 as_planet(const std::string& enum_value_str)
+-> Planet
 {
   using result_type = Planet;
-  for (size_t i = 0; i < text_planet.size(); ++i)
-    if (text_planet[i] == enum_value_str)
+  for (size_t i = 0; i < text_planet.size(); ++i) {
+    if (text_planet[i] == enum_value_str) {
       return static_cast<result_type>(i);
+    }
+  }
   return result_type::undefined;
 }
 
@@ -45,19 +49,23 @@ as_planet(const std::string& enum_value_str)
 static constexpr std::array<const char*, count_defined<Opposite>()> text_opposite{{"yin", "yang"}};
 static_assert(text_opposite.back() != nullptr, "Bad array--check commas!");
 
-std::string
+auto
 as_string(Opposite input)
+-> std::string
 {
   return input == decltype(input)::undefined ? "undefined" : text_opposite.at(static_cast<size_t>(input));
 }
 
-Opposite
+auto
 as_opposite(const std::string& enum_value_str)
+-> Opposite
 {
   using result_type = Opposite;
-  for (size_t i = 0; i < text_opposite.size(); ++i)
-    if (text_opposite[i] == enum_value_str)
+  for (size_t i = 0; i < text_opposite.size(); ++i) {
+    if (text_opposite[i] == enum_value_str) {
       return static_cast<result_type>(i);
+    }
+  }
   return result_type::undefined;
 }
 
