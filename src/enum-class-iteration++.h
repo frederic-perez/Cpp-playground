@@ -36,8 +36,9 @@ using is_enum_class = std::integral_constant<bool, !test<T>::value && std::is_en
 // is_enum_class -- end
 
 template <class T>
-constexpr size_t
+constexpr auto
 count_defined()
+-> size_t
 {
   // Note: This works for
   // 1. consecutive enum values, starting with "zero"; if not > Specialize, and
@@ -47,8 +48,8 @@ count_defined()
 }
 
 enum class Planet : uint8_t { Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune, undefined };
-std::string as_string(Planet);
-Planet as_planet(const std::string&);
+auto as_string(Planet) -> std::string;
+auto as_planet(const std::string&) -> Planet;
 
 constexpr std::array<Planet, count_defined<Planet>()> all_defined_planets{{Planet::Mercury,
                                                                            Planet::Venus,
@@ -63,8 +64,8 @@ static_assert(
   "static_assert failed: Bad array--check contents to satisfy correct size");
 
 enum class Opposite : uint8_t { yin, yang, undefined };
-std::string as_string(Opposite);
-Opposite as_opposite(const std::string&);
+auto as_string(Opposite) -> std::string;
+auto as_opposite(const std::string&) -> Opposite;
 
 constexpr std::array<Opposite, count_defined<Opposite>()> all_defined_opposites{{Opposite::yin, Opposite::yang}};
 static_assert(
