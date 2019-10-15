@@ -5,7 +5,7 @@
 
 namespace io {
 
-void convert_binary_PLY_to_ASCII_OFF(const std::string& filename_off, const std::string& filename_ply);
+void convert_binary_PLY_to_ASCII_OFF(const std::string& filename_in_ply, const std::string& filename_out_off);
 
 } // namespace io
 
