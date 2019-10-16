@@ -1,3 +1,4 @@
+#include <array>
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -58,16 +59,18 @@ io::convert_binary_OFF_to_binary_PLY(const std::string& filename_in_off, const s
   std::string line;
   getline(file_in, line);
   std::istringstream iss(line);
-  std::string word_1st, word_2nd;
-  iss >> word_1st >> word_2nd;
-  if (word_1st != "OFF" || word_2nd != "BINARY") {
+  std::array<std::string, 2> words;
+  iss >> words[0] >> words[1];
+  if (words[0] != "OFF" || words[1] != "BINARY") {
     std::cerr << "File `" << filename_in_off << "` does not start with `OFF BINARY`. Exiting...\n";
     return;
   }
 
-  oss << word_1st << ' ' << word_2nd << std::endl;
+  oss << words[0] << ' ' << words[1] << std::endl;
 
-  int num_points, num_faces, num_edges;
+  int num_points;
+  int num_faces;
+  int num_edges;
   file_in.read(reinterpret_cast<char*>(&num_points), sizeof(num_points));
   file_in.read(reinterpret_cast<char*>(&num_faces), sizeof(num_faces));
   file_in.read(reinterpret_cast<char*>(&num_edges), sizeof(num_edges));
@@ -81,14 +84,15 @@ io::convert_binary_OFF_to_binary_PLY(const std::string& filename_in_off, const s
 
   save_ply_header(file_out, num_points, num_faces);
 
-  float point[3];
+  std::array<float, 3> point;
   for (int i = 0; i < num_points; ++i) {
     file_in.read(reinterpret_cast<char*>(&point), sizeof(point));
     oss << point[0] << ' ' << point[1] << ' ' << point[2] << std::endl;
     file_out.write(reinterpret_cast<char*>(&point), sizeof(point));
   }
 
-  int num_vertices, index;
+  int num_vertices;
+  int index;
   for (int i = 0; i < num_faces; ++i) {
     file_in.read(reinterpret_cast<char*>(&num_vertices), sizeof(num_vertices));
     oss << "<<" << i << ">> " << num_vertices << ' ';
