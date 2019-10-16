@@ -79,7 +79,7 @@ io::convert_ASCII_OFF_to_binary_PLY(const std::string& filename_in_off, const st
   size_t num_vertices;
   int index;
   constexpr size_t one_two_eight = 128;
-  char tempBuf[one_two_eight];
+  std::array<char, one_two_eight> tempBuf;
   for (size_t i = 0; i < num_faces; ++i) {
     file_in >> num_vertices;
     file_out.write(reinterpret_cast<const char*>(&num_vertices), sizeof(unsigned char));
@@ -91,7 +91,7 @@ io::convert_ASCII_OFF_to_binary_PLY(const std::string& filename_in_off, const st
     // the newline. 128 is probably considerably more
     // space than necessary, but better safe than
     // sorry.
-    file_in.getline(tempBuf, one_two_eight);
+    file_in.getline(tempBuf.data(), one_two_eight);
   }
 
   file_in.close();
