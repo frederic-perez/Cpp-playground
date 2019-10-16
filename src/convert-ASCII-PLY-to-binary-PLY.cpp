@@ -11,8 +11,9 @@
 
 namespace {
 
-bool
+auto
 outputErrorAndReturnFalse(const std::string& message)
+-> bool
 {
   std::cerr << "Error: " << message << " -- Exiting...\n";
   return false;
@@ -28,8 +29,9 @@ getline_and_update(std::ifstream& file_in, std::istringstream& iss)
   iss.str(line);
 }
 
-bool
+auto
 read_ply_header(std::ifstream& file_in, std::string& texture_filename, int& num_points, int& num_faces)
+-> bool
 {
   std::istringstream iss;
   getline_and_update(file_in, iss);
@@ -150,7 +152,8 @@ io::convert_ASCII_PLY_to_binary_PLY(const std::string& filename_in, const std::s
   }
 
   std::string texture_filename;
-  int num_points = 0, num_faces = 0;
+  int num_points = 0;
+  int num_faces = 0;
   const bool succeeded = read_ply_header(file_in, texture_filename, num_points, num_faces);
   if (not succeeded) {
     std::cerr << "Could not parse the header from file `" << filename_in << "`. Exiting...\n";
@@ -163,7 +166,7 @@ io::convert_ASCII_PLY_to_binary_PLY(const std::string& filename_in, const std::s
 
   save_ply_header(file_out, texture_filename, num_points, num_faces);
 
-  float point_n_uv[3 + 3 + 2];
+  std::array<float, 3 + 3 + 2> point_n_uv;
   for (int i = 0; i < num_points; ++i) {
     file_in >> point_n_uv[0] >> point_n_uv[1] >> point_n_uv[2] // x, y, z
       >> point_n_uv[3] >> point_n_uv[4] >> point_n_uv[5] // nx, ny, nz
