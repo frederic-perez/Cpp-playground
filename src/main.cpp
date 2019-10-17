@@ -1,5 +1,6 @@
 #include <array>
 #include <iostream>
+#include <string>
 
 #include "convert-ASCII-OFF-to-binary-OFF.h"
 #include "convert-ASCII-OFF-to-binary-PLY.h"
@@ -12,12 +13,13 @@
 #undef FPCX_JUST_ASCII_OFF_TO_BINARY_PLY_20190410
 #if defined(FPCX_JUST_ASCII_OFF_TO_BINARY_PLY_20190410)
 
-int
+auto
 main(int argc, char* argv[])
+-> int
 {
   if (argc != 3) {
     std::cerr << "Error: Wrong number of parameters\n"
-              << "Usage: <progname> <filename-ASCII.off> <filename-binary.ply>\n";
+              << "Usage: <progname> <filename-ASCII-in.off> <filename-binary-out.ply>\n";
     return EXIT_FAILURE;
   }
   const std::string filename_in = argv[1];
