@@ -73,7 +73,7 @@ io::convert_ASCII_OFF_to_binary_PLY(const std::string& filename_in_off, const st
   std::array<float, 3> point;
   for (size_t i = 0; i < num_points; ++i) {
     file_in >> point[0] >> point[1] >> point[2];
-    file_out.write(reinterpret_cast<char*>(&point), sizeof(point));
+    file_out.write(reinterpret_cast<char*>(&point), sizeof point);
   }
 
   size_t num_vertices;
@@ -85,7 +85,7 @@ io::convert_ASCII_OFF_to_binary_PLY(const std::string& filename_in_off, const st
     file_out.write(reinterpret_cast<const char*>(&num_vertices), sizeof(unsigned char));
     for (size_t j = 0; j < num_vertices; ++j) {
       file_in >> index;
-      file_out.write(reinterpret_cast<char*>(&index), sizeof(int));
+      file_out.write(reinterpret_cast<char*>(&index), sizeof index);
     }
     // Clear out any face color data by reading up to
     // the newline. 128 is probably considerably more

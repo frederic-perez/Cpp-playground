@@ -127,7 +127,7 @@ io::convert_binary_PLY_to_ASCII_OFF(const std::string& filename_in_ply, const st
 
   std::array<float, 3> point;
   for (int i = 0; i < num_points; ++i) {
-    file_in.read(reinterpret_cast<char*>(&point), sizeof(point));
+    file_in.read(reinterpret_cast<char*>(&point), sizeof point);
     if (!file_in) {
       std::cerr << "Error: When i = " << i << ", only " << file_in.gcount()
                 << " elements could be read -- Exiting...\n";
@@ -140,12 +140,12 @@ io::convert_binary_PLY_to_ASCII_OFF(const std::string& filename_in_ply, const st
   unsigned char num_vertices_uc;
   int index;
   for (int i = 0; i < num_faces; ++i) {
-    file_in.read(reinterpret_cast<char*>(&num_vertices_uc), sizeof(unsigned char));
+    file_in.read(reinterpret_cast<char*>(&num_vertices_uc), sizeof num_vertices_uc);
     const auto num_vertices = static_cast<int>(num_vertices_uc);
     oss << "<<" << i << ">> " << num_vertices << ' ';
     file_out << num_vertices << ' ';
     for (int j = 0; j < num_vertices; ++j) {
-      file_in.read(reinterpret_cast<char*>(&index), sizeof(index));
+      file_in.read(reinterpret_cast<char*>(&index), sizeof index);
       if (!file_in) {
         std::cerr << "Error: When i = " << i << ", only " << file_in.gcount()
                   << " elements could be read -- Exiting...\n";

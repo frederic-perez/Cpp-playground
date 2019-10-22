@@ -71,9 +71,9 @@ io::convert_binary_OFF_to_binary_PLY(const std::string& filename_in_off, const s
   int num_points;
   int num_faces;
   int num_edges;
-  file_in.read(reinterpret_cast<char*>(&num_points), sizeof(num_points));
-  file_in.read(reinterpret_cast<char*>(&num_faces), sizeof(num_faces));
-  file_in.read(reinterpret_cast<char*>(&num_edges), sizeof(num_edges));
+  file_in.read(reinterpret_cast<char*>(&num_points), sizeof num_points);
+  file_in.read(reinterpret_cast<char*>(&num_faces), sizeof num_faces);
+  file_in.read(reinterpret_cast<char*>(&num_edges), sizeof num_edges);
 
   if (num_points < 1 || num_faces < 1) {
     std::cerr << "File `" << filename_in_off << "` has no points or no faces. Exiting...\n";
@@ -86,26 +86,26 @@ io::convert_binary_OFF_to_binary_PLY(const std::string& filename_in_off, const s
 
   std::array<float, 3> point;
   for (int i = 0; i < num_points; ++i) {
-    file_in.read(reinterpret_cast<char*>(&point), sizeof(point));
+    file_in.read(reinterpret_cast<char*>(&point), sizeof point);
     oss << point[0] << ' ' << point[1] << ' ' << point[2] << std::endl;
-    file_out.write(reinterpret_cast<char*>(&point), sizeof(point));
+    file_out.write(reinterpret_cast<char*>(&point), sizeof point);
   }
 
   int num_vertices;
   int index;
   for (int i = 0; i < num_faces; ++i) {
-    file_in.read(reinterpret_cast<char*>(&num_vertices), sizeof(num_vertices));
+    file_in.read(reinterpret_cast<char*>(&num_vertices), sizeof num_vertices);
     oss << "<<" << i << ">> " << num_vertices << ' ';
     file_out.write(reinterpret_cast<const char*>(&num_vertices), sizeof(unsigned char));
     for (int j = 0; j < num_vertices; ++j) {
-      file_in.read(reinterpret_cast<char*>(&index), sizeof(index));
+      file_in.read(reinterpret_cast<char*>(&index), sizeof index);
       if (!file_in) {
         std::cerr << "Error: When i = " << i << ", only " << file_in.gcount()
                   << " elements could be read -- Exiting...\n";
         return;
       }
       oss << index << ' ';
-      file_out.write(reinterpret_cast<char*>(&index), sizeof(index));
+      file_out.write(reinterpret_cast<char*>(&index), sizeof index);
     }
     oss << std::endl;
   }

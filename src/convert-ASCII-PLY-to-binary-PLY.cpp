@@ -171,7 +171,7 @@ io::convert_ASCII_PLY_to_binary_PLY(const std::string& filename_in, const std::s
     file_in >> point_n_uv[0] >> point_n_uv[1] >> point_n_uv[2] // x, y, z
       >> point_n_uv[3] >> point_n_uv[4] >> point_n_uv[5] // nx, ny, nz
       >> point_n_uv[6] >> point_n_uv[7]; // u, v
-    file_out.write(reinterpret_cast<char*>(&point_n_uv), sizeof(point_n_uv));
+    file_out.write(reinterpret_cast<char*>(&point_n_uv), sizeof point_n_uv);
   }
 
   size_t num_vertices;
@@ -182,7 +182,7 @@ io::convert_ASCII_PLY_to_binary_PLY(const std::string& filename_in, const std::s
     file_out.write(reinterpret_cast<const char*>(&num_vertices), sizeof(unsigned char));
     for (size_t j = 0; j < num_vertices; ++j) {
       file_in >> index;
-      file_out.write(reinterpret_cast<char*>(&index), sizeof(int));
+      file_out.write(reinterpret_cast<char*>(&index), sizeof index);
     }
     // Clear out any face color data by reading up to
     // the newline. 128 is probably considerably more

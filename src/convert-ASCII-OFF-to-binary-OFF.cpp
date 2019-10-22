@@ -57,15 +57,15 @@ io::convert_ASCII_OFF_to_binary_OFF(const std::string& filename_in, const std::s
 
   oss << num_points << ' ' << num_faces << ' ' << num_edges << std::endl;
 
-  file_out.write(reinterpret_cast<char*>(&num_points), sizeof(int));
-  file_out.write(reinterpret_cast<char*>(&num_faces), sizeof(int));
-  file_out.write(reinterpret_cast<char*>(&num_edges), sizeof(int));
+  file_out.write(reinterpret_cast<char*>(&num_points), sizeof num_points);
+  file_out.write(reinterpret_cast<char*>(&num_faces), sizeof num_faces);
+  file_out.write(reinterpret_cast<char*>(&num_edges), sizeof num_edges);
 
   std::array<float, 3> point;
   for (int i = 0; i < num_points; ++i) {
     file_in >> point[0] >> point[1] >> point[2];
     oss << point[0] << ' ' << point[1] << ' ' << point[2] << std::endl;
-    file_out.write(reinterpret_cast<char*>(&point), sizeof(point));
+    file_out.write(reinterpret_cast<char*>(&point), sizeof point);
   }
 
   int num_vertices;
@@ -74,11 +74,11 @@ io::convert_ASCII_OFF_to_binary_OFF(const std::string& filename_in, const std::s
   for (int i = 0; i < num_faces; ++i) {
     file_in >> num_vertices;
     oss << "<<" << i << ">> " << num_vertices << ' ';
-    file_out.write(reinterpret_cast<const char*>(&num_vertices), sizeof(num_vertices));
+    file_out.write(reinterpret_cast<const char*>(&num_vertices), sizeof num_vertices);
     for (int j = 0; j < num_vertices; ++j) {
       file_in >> index;
       oss << index << ' ';
-      file_out.write(reinterpret_cast<char*>(&index), sizeof(index));
+      file_out.write(reinterpret_cast<char*>(&index), sizeof index);
       if (file_out.bad()) {
         std::cerr << "Error: When i = " << i << " and j = " << j << ", writing to `" << filename_out
                   << "` failed -- Exiting...\n";
