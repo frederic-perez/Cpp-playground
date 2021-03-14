@@ -10,26 +10,6 @@
 #include "enum-class-iteration++.h"
 #include "spy.h"
 
-// Specifying unsigned char values as literals in the code:
-// From https://stackoverflow.com/questions/2304732/how-do-i-specify-an-integer-literal-of-type-unsigned-char-in-c
-// C++11 introduced user defined literals.It can be used like this:
-inline constexpr unsigned char operator "" _uchar(unsigned long long arg) noexcept
-{	return static_cast<unsigned char>(arg); }
-
-void
-TryUnsignedCharLiterals()
-{
-#undef FPCX_MIXING_UNSIGNED_CHAR_WITH_INTEGER_20210130
-#if defined(FPCX_MIXING_UNSIGNED_CHAR_WITH_INTEGER_20210130)
-  const auto result = std::min(42_uchar, 66);
-  // '- Compiler error: No instance of overloaded function "std::min" matches the argument list
-#else
-  const auto result = std::min(42_uchar, static_cast<unsigned char>(66)); // OK, same type
-#endif
-  std::cout << "std::min(...) returned (as size_t) " << static_cast<size_t>(result) << '\n'
-    << std::endl;
-}
-
 #undef FPCX_JUST_ASCII_OFF_TO_BINARY_PLY_20190410
 #if defined(FPCX_JUST_ASCII_OFF_TO_BINARY_PLY_20190410)
 
@@ -89,8 +69,6 @@ main(int, char*[])
 
     std::clog << std::endl;
   }
-
-  TryUnsignedCharLiterals();
 
   std::cout << "Bye, Cpp-playground!" << std::endl;
   return EXIT_SUCCESS;
