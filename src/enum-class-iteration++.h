@@ -7,6 +7,10 @@
 
 namespace enums {
 
+//
+// tools, helpers
+//
+
 // From https://stackoverflow.com/questions/14589417/can-an-enum-class-be-converted-to-the-underlying-type
 //
 // as_integral -- begin
@@ -47,30 +51,34 @@ count_defined()
   return static_cast<size_t>(T::undefined);
 }
 
+//
+// Planet
+//
+
 enum class Planet : uint8_t { Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune, undefined };
 auto as_string(Planet) -> std::string;
 auto as_planet(const std::string&) -> Planet;
 
-constexpr std::array<Planet, count_defined<Planet>()> all_defined_planets{{Planet::Mercury,
-                                                                           Planet::Venus,
-                                                                           Planet::Earth,
-                                                                           Planet::Mars,
-                                                                           Planet::Jupiter,
-                                                                           Planet::Saturn,
-                                                                           Planet::Uranus,
-                                                                           Planet::Neptune}};
-static_assert(
-  all_defined_planets.back() != static_cast<Planet>(0),
-  "static_assert failed: Bad array--check contents to satisfy correct size");
+constexpr std::array all_defined_planets{Planet::Mercury,
+                                         Planet::Venus,
+                                         Planet::Earth,
+                                         Planet::Mars,
+                                         Planet::Jupiter,
+                                         Planet::Saturn,
+                                         Planet::Uranus,
+                                         Planet::Neptune};
+static_assert(all_defined_planets.size() == count_defined<Planet>(), "Bad array: wrong size");
+
+//
+// Opposite
+//
 
 enum class Opposite : uint8_t { yin, yang, undefined };
 auto as_string(Opposite) -> std::string;
 auto as_opposite(const std::string&) -> Opposite;
 
-constexpr std::array<Opposite, count_defined<Opposite>()> all_defined_opposites{{Opposite::yin, Opposite::yang}};
-static_assert(
-  all_defined_opposites.back() != static_cast<Opposite>(0),
-  "static_assert failed: Bad array--check contents to satisfy correct size");
+constexpr std::array all_defined_opposites{Opposite::yin, Opposite::yang};
+static_assert(all_defined_opposites.size() == count_defined<Opposite>(), "Bad array: wrong size");
 
 void ExamplesOfEnumClassAsIntegral();
 void ExamplesOfEnumClassIteration();
