@@ -57,7 +57,7 @@ count_defined()
 
 enum class Planet : uint8_t { Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune, undefined };
 auto as_string(Planet) -> std::string;
-auto as_planet(const std::string&) -> Planet;
+constexpr auto as_planet(const std::string&) -> Planet;
 
 constexpr std::array all_defined_planets{Planet::Mercury,
                                          Planet::Venus,
@@ -75,7 +75,7 @@ static_assert(all_defined_planets.size() == count_defined<Planet>(), "Bad array:
 
 enum class Opposite : uint8_t { yin, yang, undefined };
 auto as_string(Opposite) -> std::string;
-auto as_opposite(const std::string&) -> Opposite;
+constexpr auto as_opposite(const std::string&) -> Opposite;
 
 constexpr std::array all_defined_opposites{Opposite::yin, Opposite::yang};
 static_assert(all_defined_opposites.size() == count_defined<Opposite>(), "Bad array: wrong size");

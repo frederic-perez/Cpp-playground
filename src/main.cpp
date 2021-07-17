@@ -38,9 +38,13 @@ main(int, char*[])
 {
   std::cout << "Hello, Cpp-playground!\n" << std::endl;
 
-  enums::ExamplesOfEnumClassAsIntegral();
-  enums::ExamplesOfEnumClassIteration();
-  std::cout << std::endl;
+  try {
+    enums::ExamplesOfEnumClassAsIntegral();
+    enums::ExamplesOfEnumClassIteration();
+    std::cout << std::endl;
+  } catch (const std::string& message) {
+    std::cerr << "Exception caught: " << message << "\n\n";
+  }
 
 #  if defined(__linux__) || defined(__linux) || defined(linux) || defined(__gnu_linux__)
   size_t vm, rss;

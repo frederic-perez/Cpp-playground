@@ -1,6 +1,8 @@
 #include <cassert> // TODO: Use Boost instead of the good old <cassert>
 #include <iostream>
 
+#include <boost/assert.hpp>
+
 #include "enum-class-iteration+.h"
 
 namespace enums {
@@ -29,7 +31,7 @@ as_string(Planet input)
   return input == decltype(input)::undefined ? "undefined" : text_planet.at(static_cast<size_t>(input));
 }
 
-auto
+constexpr auto
 as_planet(const std::string& enum_value_str)
 -> Planet
 {
@@ -56,7 +58,7 @@ as_string(Opposite input)
   return input == decltype(input)::undefined ? "undefined" : text_opposite.at(static_cast<size_t>(input));
 }
 
-auto
+constexpr auto
 as_opposite(const std::string& enum_value_str)
 -> Opposite
 {
@@ -78,12 +80,11 @@ using uint = unsigned int;
 void
 enums::ExamplesOfEnumClassAsIntegral()
 {
-  using namespace enums;
-  Planet planet = Planet::Earth;
-  std::cout << "planet Earth as string: " << as_string(planet)
+  auto planet = Planet::Earth;
+  std::cout << "planet = Planet::Earth as string: " << as_string(planet)
             << "; static_cast<uint>(as_integral(planet)): " << static_cast<uint>(as_integral(planet)) << std::endl;
   planet = Planet::undefined;
-  std::cout << "planet undefined as string: " << as_string(planet)
+  std::cout << "planet = Planet::undefined as string: " << as_string(planet)
             << "; static_cast<uint>(as_integral(planet)): " << static_cast<uint>(as_integral(planet)) << '\n'
             << std::endl;
 }
@@ -91,17 +92,24 @@ enums::ExamplesOfEnumClassAsIntegral()
 void
 enums::ExamplesOfEnumClassIteration()
 {
-  using namespace enums;
+  using namespace std::string_literals;
+
   std::cout << "all_defined_planets.size() = " << all_defined_planets.size() << "\n"
             << "count_defined<Planet>() = " << count_defined<Planet>() << std::endl;
   for (const auto planet : all_defined_planets) {
     const std::string planet_str = as_string(planet);
-    assert(planet == as_planet(planet_str)); // TODO: Use Boost here
+    if (planet != as_planet(planet_str))
+      throw "Problem using planet"s;
     std::cout << "planet as string: " << planet_str << std::endl;
   }
+  std::cout << std::endl;
+
+  std::cout << "all_defined_opposites.size() = " << all_defined_opposites.size() << "\n"
+    << "count_defined<Opposite>() = " << count_defined<Opposite>() << std::endl;
   for (const auto opposite : all_defined_opposites) {
     const std::string opposite_str = as_string(opposite);
-    assert(opposite == as_opposite(opposite_str)); // TODO: Use Boost here
+    if (opposite != as_opposite(opposite_str))
+      throw "Problem using opposite"s;
     std::cout << "opposite as string: " << opposite_str << std::endl;
   }
 }
