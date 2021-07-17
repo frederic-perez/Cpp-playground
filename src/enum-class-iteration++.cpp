@@ -18,9 +18,9 @@ const size_t num_defined_in_int = count_defined<int>(); // ditto
 // Planet
 //
 
-static constexpr std::array<const char*, count_defined<Planet>()> text_planet{
-  {"Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"}};
-static_assert(text_planet.back() != nullptr, "Bad array--check commas!");
+static constexpr std::array text_planet{
+  "Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"};
+static_assert(text_planet.size() == count_defined<Planet>(), "Bad array: wrong size");
 
 auto
 as_string(Planet input)
@@ -46,8 +46,8 @@ as_planet(const std::string& enum_value_str)
 // Opposite
 //
 
-static constexpr std::array<const char*, count_defined<Opposite>()> text_opposite{{"yin", "yang"}};
-static_assert(text_opposite.back() != nullptr, "Bad array--check commas!");
+static constexpr std::array text_opposite{"yin", "yang"};
+static_assert(text_opposite.size() == count_defined<Opposite>(), "Bad array: wrong size");
 
 auto
 as_string(Opposite input)
