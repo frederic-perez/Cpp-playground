@@ -1,7 +1,7 @@
 #include <cassert> // TODO: Use Boost instead of the good old <cassert>
 #include <iostream>
 
-#include "enum-class-iteration++.h"
+#include "enum-class-iteration+.h"
 
 namespace enums {
 

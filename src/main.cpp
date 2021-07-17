@@ -7,7 +7,7 @@
 #include "convert-ASCII-PLY-to-binary-PLY.h"
 #include "convert-binary-OFF-to-binary-PLY.h"
 #include "convert-binary-PLY-to-ASCII-OFF.h"
-#include "enum-class-iteration++.h"
+#include "enum-class-iteration+.h"
 #include "spy.h"
 
 #undef FPCX_JUST_ASCII_OFF_TO_BINARY_PLY_20190410
