@@ -59,14 +59,15 @@ enum class Planet : uint8_t { Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uran
 auto as_string(Planet) -> std::string;
 constexpr auto as_planet(const std::string&) -> Planet;
 
-constexpr std::array all_defined_planets{Planet::Mercury,
-                                         Planet::Venus,
-                                         Planet::Earth,
-                                         Planet::Mars,
-                                         Planet::Jupiter,
-                                         Planet::Saturn,
-                                         Planet::Uranus,
-                                         Planet::Neptune};
+constexpr std::array all_defined_planets{
+  Planet::Mercury,
+  Planet::Venus,
+  Planet::Earth,
+  Planet::Mars,
+  Planet::Jupiter,
+  Planet::Saturn,
+  Planet::Uranus,
+  Planet::Neptune};
 static_assert(all_defined_planets.size() == count_defined<Planet>(), "Bad array: wrong size");
 
 //
