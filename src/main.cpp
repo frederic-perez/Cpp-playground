@@ -7,7 +7,6 @@
 #include "convert-ASCII-PLY-to-binary-PLY.h"
 #include "convert-binary-OFF-to-binary-PLY.h"
 #include "convert-binary-PLY-to-ASCII-OFF.h"
-#include "enum-class-iteration+.h"
 #include "spy.h"
 
 #undef FPCX_JUST_ASCII_OFF_TO_BINARY_PLY_20190410
@@ -37,14 +36,6 @@ main(int, char*[])
 -> int
 {
   std::cout << "Hello, Cpp-playground!\n" << std::endl;
-
-  try {
-    enums::ExamplesOfEnumClassAsIntegral();
-    enums::ExamplesOfEnumClassIteration();
-    std::cout << std::endl;
-  } catch (const std::string& message) {
-    std::cerr << "Exception caught: " << message << "\n\n";
-  }
 
 #  if defined(__linux__) || defined(__linux) || defined(linux) || defined(__gnu_linux__)
   size_t vm, rss;
