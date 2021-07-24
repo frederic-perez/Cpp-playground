@@ -43,7 +43,8 @@ main(int, char*[])
   std::cout << "Memory usage: vm=" << vm << "; rss=" << rss << '\n' << std::endl;
 #  endif
 
-  const std::array<std::string, 3> filename_roots{{"boxcube", "dodecahedron", "icosahedron"}};
+  using namespace std::string_literals;
+  const std::array filename_roots{"boxcube"s, "dodecahedron"s, "icosahedron"s};
   for (const auto& filename_root : filename_roots) {
     std::clog << "Dealing with `" << filename_root << "`:" << std::endl;
 

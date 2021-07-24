@@ -55,7 +55,7 @@ read_ply_header(std::ifstream& file_in, int& num_points, int& num_faces)
     return outputErrorAndReturnFalse("Expected `element vertex <n>`");
   }
 
-  const std::array<char, 3> axes{{'x', 'y', 'z'}};
+  const std::array axes{'x', 'y', 'z'};
   for (const auto axis : axes) {
     getline_and_update(file_in, iss);
     char c;

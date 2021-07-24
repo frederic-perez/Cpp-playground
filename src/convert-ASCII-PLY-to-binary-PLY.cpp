@@ -59,7 +59,7 @@ read_ply_header(std::ifstream& file_in, std::string& texture_filename, int& num_
     return outputErrorAndReturnFalse("Expected `element vertex <n>`");
   }
 
-  const std::array<char, 3> axes{{'x', 'y', 'z'}};
+  const std::array axes{'x', 'y', 'z'};
   for (const auto axis : axes) {
     getline_and_update(file_in, iss);
     char c;
@@ -69,7 +69,8 @@ read_ply_header(std::ifstream& file_in, std::string& texture_filename, int& num_
     }
   }
 
-  const std::array<std::string, 3> n_axes{{"nx", "ny", "nz"}};
+  using namespace std::string_literals;
+  const std::array n_axes{"nx"s, "ny"s, "nz"s};
   for (const auto& n_axis : n_axes) {
     getline_and_update(file_in, iss);
     iss >> words[0] >> words[1] >> words[2];
@@ -78,7 +79,7 @@ read_ply_header(std::ifstream& file_in, std::string& texture_filename, int& num_
     }
   }
 
-  const std::array<std::string, 2> textures{{"texture_u", "texture_v"}};
+  const std::array textures{"texture_u"s, "texture_v"s};
   for (const auto& texture : textures) {
     getline_and_update(file_in, iss);
     iss >> words[0] >> words[1] >> words[2];
