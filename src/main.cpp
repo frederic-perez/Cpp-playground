@@ -48,18 +48,18 @@ main(int, char*[])
   for (const auto& filename_root : filename_roots) {
     std::clog << "Dealing with `" << filename_root << "`:" << std::endl;
 
-    const std::string filename_in_ASCII_OFF = filename_root + "-ASCII.off";
-    const std::string filename_out_from_ASCII_OFF_to_binary_PLY = filename_root + "--from-ASCII-OFF--binary.ply";
+    const auto filename_in_ASCII_OFF = filename_root + "-ASCII.off";
+    const auto filename_out_from_ASCII_OFF_to_binary_PLY = filename_root + "--from-ASCII-OFF--binary.ply";
     io::convert_ASCII_OFF_to_binary_PLY(filename_in_ASCII_OFF, filename_out_from_ASCII_OFF_to_binary_PLY);
 
-    const std::string filename_out_from_ASCII_OFF_to_binary_OFF = filename_root + "--from-ASCII-OFF--binary.off";
+    const auto filename_out_from_ASCII_OFF_to_binary_OFF = filename_root + "--from-ASCII-OFF--binary.off";
     io::convert_ASCII_OFF_to_binary_OFF(filename_in_ASCII_OFF, filename_out_from_ASCII_OFF_to_binary_OFF);
 
-    const std::string filename_out_from_binary_OFF_to_binary_PLY = filename_root + "--from-binary-OFF--binary.ply";
+    const auto filename_out_from_binary_OFF_to_binary_PLY = filename_root + "--from-binary-OFF--binary.ply";
     io::convert_binary_OFF_to_binary_PLY(
       filename_out_from_ASCII_OFF_to_binary_OFF, filename_out_from_binary_OFF_to_binary_PLY);
 
-    const std::string filename_out_from_binary_PLY_to_ASCII_OFF = filename_root + "--from-binary-PLY--ASCII.off";
+    const auto filename_out_from_binary_PLY_to_ASCII_OFF = filename_root + "--from-binary-PLY--ASCII.off";
     io::convert_binary_PLY_to_ASCII_OFF(
       filename_out_from_ASCII_OFF_to_binary_PLY, filename_out_from_binary_PLY_to_ASCII_OFF);
 
