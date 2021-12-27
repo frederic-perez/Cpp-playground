@@ -59,7 +59,7 @@ io::convert_ASCII_OFF_to_binary_PLY(const std::string& filename_in_off, const st
   size_t num_edges;
   file_in >> num_points >> num_faces >> num_edges;
 
-  if (num_points < 1 || num_faces < 1) {
+  if (num_points < 1 or num_faces < 1) {
     std::cerr << "File `" << filename_in_off << "` has no points or no faces. Exiting...\n";
     return;
   }

@@ -57,7 +57,7 @@ io::convert_binary_OFF_to_binary_PLY(const std::string& filename_in_off, const s
   std::istringstream iss(line);
   std::array<std::string, 2> words;
   iss >> words[0] >> words[1];
-  if (words[0] != "OFF" || words[1] != "BINARY") {
+  if (words[0] != "OFF" or words[1] != "BINARY") {
     std::cerr << "File `" << filename_in_off << "` does not start with `OFF BINARY`. Exiting...\n";
     return;
   }
@@ -71,7 +71,7 @@ io::convert_binary_OFF_to_binary_PLY(const std::string& filename_in_off, const s
   file_in.read(reinterpret_cast<char*>(&num_faces), sizeof num_faces);
   file_in.read(reinterpret_cast<char*>(&num_edges), sizeof num_edges);
 
-  if (num_points < 1 || num_faces < 1) {
+  if (num_points < 1 or num_faces < 1) {
     std::cerr << "File `" << filename_in_off << "` has no points or no faces. Exiting...\n";
     return;
   }
@@ -95,7 +95,7 @@ io::convert_binary_OFF_to_binary_PLY(const std::string& filename_in_off, const s
     file_out.write(reinterpret_cast<const char*>(&num_vertices), sizeof(unsigned char));
     for (int j = 0; j < num_vertices; ++j) {
       file_in.read(reinterpret_cast<char*>(&index), sizeof index);
-      if (!file_in) {
+      if (not file_in) {
         std::cerr << "Error: When i = " << i << ", only " << file_in.gcount()
                   << " elements could be read -- Exiting...\n";
         return;

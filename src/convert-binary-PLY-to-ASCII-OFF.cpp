@@ -35,7 +35,7 @@ read_ply_header(std::ifstream& file_in, int& num_points, int& num_faces)
   getline_and_update(file_in, iss);
   std::array<std::string, 5> words;
   iss >> words[0];
-  if (words[0] != "ply" && words[0] != "PLY") {
+  if (words[0] != "ply" and words[0] != "PLY") {
     return outputErrorAndReturnFalse("Expected `ply` or `PLY` keyword.");
   }
 
@@ -124,7 +124,7 @@ io::convert_binary_PLY_to_ASCII_OFF(const std::string& filename_in_ply, const st
   std::array<float, 3> point;
   for (int i = 0; i < num_points; ++i) {
     file_in.read(reinterpret_cast<char*>(&point), sizeof point);
-    if (!file_in) {
+    if (not file_in) {
       std::cerr << "Error: When i = " << i << ", only " << file_in.gcount()
                 << " elements could be read -- Exiting...\n";
       return;
@@ -142,7 +142,7 @@ io::convert_binary_PLY_to_ASCII_OFF(const std::string& filename_in_ply, const st
     file_out << num_vertices << ' ';
     for (int j = 0; j < num_vertices; ++j) {
       file_in.read(reinterpret_cast<char*>(&index), sizeof index);
-      if (!file_in) {
+      if (not file_in) {
         std::cerr << "Error: When i = " << i << ", only " << file_in.gcount()
                   << " elements could be read -- Exiting...\n";
         return;

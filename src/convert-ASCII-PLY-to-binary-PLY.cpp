@@ -33,7 +33,7 @@ read_ply_header(std::ifstream& file_in, std::string& texture_filename, int& num_
   getline_and_update(file_in, iss);
   std::array<std::string, 5> words;
   iss >> words[0];
-  if (words[0] != "ply" && words[0] != "PLY") {
+  if (words[0] != "ply" and words[0] != "PLY") {
     return outputErrorAndReturnFalse("Expected `ply` or `PLY` keyword.");
   }
 

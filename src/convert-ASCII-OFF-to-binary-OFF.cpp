@@ -46,7 +46,7 @@ io::convert_ASCII_OFF_to_binary_OFF(const std::string& filename_in, const std::s
   int num_edges;
   file_in >> num_points >> num_faces >> num_edges;
 
-  if (num_points < 1 || num_faces < 1) {
+  if (num_points < 1 or num_faces < 1) {
     std::cerr << "File `" << filename_in << "` has no points or no faces. Exiting...\n";
     return;
   }
@@ -87,12 +87,12 @@ io::convert_ASCII_OFF_to_binary_OFF(const std::string& filename_in, const std::s
   }
 
   file_in.close();
-  if (!file_in) {
+  if (not file_in) {
     std::cerr << "Error: Reading from file `" << filename_in << "` failed";
   }
 
   file_out.close();
-  if (!file_out) {
+  if (not file_out) {
     std::cerr << "Error: Writing to file `" << filename_out << "` failed";
   }
 
