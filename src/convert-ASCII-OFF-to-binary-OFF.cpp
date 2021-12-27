@@ -5,10 +5,6 @@
 
 #include <boost/assert.hpp>
 
-#if defined(_MSC_VER)
-#  include <iso646.h> // not
-#endif
-
 #include "convert-ASCII-OFF-to-binary-OFF.h"
 
 void

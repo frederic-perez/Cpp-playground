@@ -3,10 +3,6 @@
 #include <iostream>
 #include <sstream>
 
-#if defined(_MSC_VER)
-#  include <iso646.h> // not
-#endif
-
 #include <boost/assert.hpp>
 
 #include "convert-binary-OFF-to-binary-PLY.h"

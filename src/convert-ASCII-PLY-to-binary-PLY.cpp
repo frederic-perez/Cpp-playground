@@ -3,10 +3,6 @@
 #include <iostream>
 #include <sstream>
 
-#if defined(_MSC_VER)
-#  include <iso646.h> // not
-#endif
-
 #include "convert-ASCII-PLY-to-binary-PLY.h"
 
 namespace {

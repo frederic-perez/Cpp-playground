@@ -2,10 +2,6 @@
 #include <fstream>
 #include <iostream>
 
-#if defined(_MSC_VER)
-#  include <iso646.h> // not
-#endif
-
 #include "convert-ASCII-OFF-to-binary-PLY.h"
 
 namespace {
