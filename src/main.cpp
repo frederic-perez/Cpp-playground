@@ -7,6 +7,7 @@
 #include "convert-ASCII-PLY-to-binary-PLY.h"
 #include "convert-binary-OFF-to-binary-PLY.h"
 #include "convert-binary-PLY-to-ASCII-OFF.h"
+#include "encode-decode.h"
 #include "spy.h"
 
 #undef FPCX_JUST_ASCII_OFF_TO_BINARY_PLY_20190410
@@ -62,6 +63,11 @@ main(int, char*[])
     const auto filename_out_from_binary_PLY_to_ASCII_OFF = filename_root + "--from-binary-PLY--ASCII.off";
     io::convert_binary_PLY_to_ASCII_OFF(
       filename_out_from_ASCII_OFF_to_binary_PLY, filename_out_from_binary_PLY_to_ASCII_OFF);
+
+    const auto filename_out_from_ASCII_OFF_to_binary_PLY_encoded = filename_out_from_ASCII_OFF_to_binary_PLY + ".enc";
+    io::encode(filename_out_from_ASCII_OFF_to_binary_PLY, filename_out_from_ASCII_OFF_to_binary_PLY_encoded);
+    const auto filename_out_from_ASCII_OFF_to_binary_PLY_decoded = filename_out_from_ASCII_OFF_to_binary_PLY_encoded + ".dec";
+    io::decode(filename_out_from_ASCII_OFF_to_binary_PLY_encoded, filename_out_from_ASCII_OFF_to_binary_PLY_decoded);
 
     std::clog << std::endl;
   }

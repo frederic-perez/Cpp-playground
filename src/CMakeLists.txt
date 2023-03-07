@@ -34,6 +34,7 @@ set(SRC_LIST
   convert-ASCII-PLY-to-binary-PLY.cpp convert-ASCII-PLY-to-binary-PLY.h
   convert-binary-OFF-to-binary-PLY.cpp convert-binary-OFF-to-binary-PLY.h
   convert-binary-PLY-to-ASCII-OFF.cpp convert-binary-PLY-to-ASCII-OFF.h
+  encode-decode.cpp encode-decode.h
   main.cpp
   spy.cpp spy.h
 )
