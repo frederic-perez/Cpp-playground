@@ -2,13 +2,13 @@
 #include <iostream>
 #include <string>
 
-#include "convert-ASCII-OFF-to-binary-OFF.h"
-#include "convert-ASCII-OFF-to-binary-PLY.h"
-#include "convert-ASCII-PLY-to-binary-PLY.h"
-#include "convert-binary-OFF-to-binary-PLY.h"
-#include "convert-binary-PLY-to-ASCII-OFF.h"
-#include "encode-decode.h"
-#include "spy.h"
+#include "convert-ASCII-OFF-to-binary-OFF.hpp"
+#include "convert-ASCII-OFF-to-binary-PLY.hpp"
+#include "convert-ASCII-PLY-to-binary-PLY.hpp"
+#include "convert-binary-OFF-to-binary-PLY.hpp"
+#include "convert-binary-PLY-to-ASCII-OFF.hpp"
+#include "encode-decode.hpp"
+#include "spy.hpp"
 
 #undef FPCX_JUST_ASCII_OFF_TO_BINARY_PLY_20190410
 #if defined(FPCX_JUST_ASCII_OFF_TO_BINARY_PLY_20190410)

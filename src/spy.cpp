@@ -5,7 +5,7 @@
 #  include <unistd.h>
 #endif
 
-#include "spy.h"
+#include "spy.hpp"
 
 #if defined(__linux__) || defined(__linux) || defined(linux) || defined(__gnu_linux__)
 // Code based on

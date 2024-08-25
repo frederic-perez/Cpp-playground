@@ -3,7 +3,7 @@
 #include <iostream>
 #include <sstream>
 
-#include "convert-ASCII-PLY-to-binary-PLY.h"
+#include "convert-ASCII-PLY-to-binary-PLY.hpp"
 
 namespace {
 

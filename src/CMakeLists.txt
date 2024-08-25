@@ -29,14 +29,14 @@ else ()
 endif ()
 
 set(SRC_LIST
-  convert-ASCII-OFF-to-binary-OFF.cpp convert-ASCII-OFF-to-binary-OFF.h
-  convert-ASCII-OFF-to-binary-PLY.cpp convert-ASCII-OFF-to-binary-PLY.h
-  convert-ASCII-PLY-to-binary-PLY.cpp convert-ASCII-PLY-to-binary-PLY.h
-  convert-binary-OFF-to-binary-PLY.cpp convert-binary-OFF-to-binary-PLY.h
-  convert-binary-PLY-to-ASCII-OFF.cpp convert-binary-PLY-to-ASCII-OFF.h
-  encode-decode.cpp encode-decode.h
+  convert-ASCII-OFF-to-binary-OFF.cpp convert-ASCII-OFF-to-binary-OFF.hpp
+  convert-ASCII-OFF-to-binary-PLY.cpp convert-ASCII-OFF-to-binary-PLY.hpp
+  convert-ASCII-PLY-to-binary-PLY.cpp convert-ASCII-PLY-to-binary-PLY.hpp
+  convert-binary-OFF-to-binary-PLY.cpp convert-binary-OFF-to-binary-PLY.hpp
+  convert-binary-PLY-to-ASCII-OFF.cpp convert-binary-PLY-to-ASCII-OFF.hpp
+  encode-decode.cpp encode-decode.hpp
   main.cpp
-  spy.cpp spy.h
+  spy.cpp spy.hpp
 )
 
 add_executable(${PROJECT_NAME} ${SRC_LIST})

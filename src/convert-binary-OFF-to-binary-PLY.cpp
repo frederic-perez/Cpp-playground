@@ -5,7 +5,7 @@
 
 #include <boost/assert.hpp>
 
-#include "convert-binary-OFF-to-binary-PLY.h"
+#include "convert-binary-OFF-to-binary-PLY.hpp"
 
 namespace {
 

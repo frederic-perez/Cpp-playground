@@ -1,5 +1,5 @@
-#ifndef CPP_PLAYGROUND_SPY_H
-#define CPP_PLAYGROUND_SPY_H
+#ifndef CPP_PLAYGROUND_SPY_HPP
+#define CPP_PLAYGROUND_SPY_HPP
 
 #include <cstddef> // size_t
 

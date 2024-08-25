@@ -5,7 +5,7 @@
 
 #include <boost/assert.hpp>
 
-#include "convert-ASCII-OFF-to-binary-OFF.h"
+#include "convert-ASCII-OFF-to-binary-OFF.hpp"
 
 void
 io::convert_ASCII_OFF_to_binary_OFF(const std::string& filename_in, const std::string& filename_out)

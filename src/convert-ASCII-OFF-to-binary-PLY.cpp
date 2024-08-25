@@ -2,7 +2,7 @@
 #include <fstream>
 #include <iostream>
 
-#include "convert-ASCII-OFF-to-binary-PLY.h"
+#include "convert-ASCII-OFF-to-binary-PLY.hpp"
 
 namespace {
 

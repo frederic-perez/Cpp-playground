@@ -1,7 +1,7 @@
 #include <fstream>
 #include <iostream>
 
-#include "encode-decode.h"
+#include "encode-decode.hpp"
 
 void
 io::encode(const std::string& filename_in, const std::string& filename_out)

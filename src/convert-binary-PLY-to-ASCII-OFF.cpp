@@ -5,7 +5,7 @@
 
 #include <boost/assert.hpp>
 
-#include "convert-binary-PLY-to-ASCII-OFF.h"
+#include "convert-binary-PLY-to-ASCII-OFF.hpp"
 
 namespace {
 
